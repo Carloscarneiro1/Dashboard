@@ -26,13 +26,16 @@
       margin:5px 5px 0 0; border-radius:6px; cursor:pointer; font-size:.85rem;
     }
     .filter-btn.secondary { background:#555 }
+    .subtitle { font-size:.85rem; color:#555; margin-bottom:8px }
   </style>
 </head>
 
 <body>
 
 <h1>Dashboard RO – Reclamações</h1>
-<p>Dados carregados automaticamente do arquivo: <b>dados.csv</b></p>
+<p class="subtitle" id="subtitle">
+  Dados carregados automaticamente do arquivo: <b>dados.csv</b> — filtros ativos: Nenhum
+</p>
 
 <!-- Indicadores -->
 <div style="display:flex;flex-wrap:wrap">
@@ -52,11 +55,11 @@
 <!-- Gráficos -->
 <div style="display:flex; gap:15px; flex-wrap:wrap">
   <div class="section" style="flex:1">
-    <h3>ROs por Motivo</h3>
+    <h3>ROs por Motivo (clique para filtrar)</h3>
     <canvas id="motivoChart"></canvas>
   </div>
   <div class="section" style="flex:1">
-    <h3>ROs por Situação Atual</h3>
+    <h3>ROs por Situação Atual (clique para filtrar)</h3>
     <canvas id="statusChart"></canvas>
   </div>
 </div>
@@ -87,6 +90,10 @@ let dadosOriginais = [];
 let dadosFiltrados = [];
 let motivoChart, statusChart;
 
+// filtros atuais
+let filtroStatus = "todas"; // 'todas', 'sem_situacao' ou status específico
+let filtroMotivo = "todos"; // 'todos' ou motivo específico
+
 /* Remove BOM invisível e espaços */
 function limparCampo(str) {
   if (!str) return "";
@@ -99,6 +106,8 @@ fetch("dados.csv")
   .then(texto => processarCSV(texto))
   .catch(err => {
     console.error("Erro ao carregar CSV:", err);
+    document.getElementById("subtitle").textContent =
+      "Erro ao carregar dados.csv: " + err.message;
   });
 
 function processarCSV(csv) {
@@ -140,7 +149,27 @@ function processarCSV(csv) {
     return { cliente, numeroRO, dataAbertura, motivo, situacaoRO, qtdFP, ultFP, ton, m2 };
   }).filter(r => r !== null);
 
-  dadosFiltrados = [...dadosOriginais];
+  // aplica filtros iniciais
+  aplicarFiltrosCombinados();
+}
+
+/* Aplica filtros de status + motivo e atualiza dashboard */
+function aplicarFiltrosCombinados() {
+  let base = [...dadosOriginais];
+
+  // filtro de status
+  if (filtroStatus === "sem_situacao") {
+    base = base.filter(r => !r.situacaoRO || r.situacaoRO === "Status não informado");
+  } else if (filtroStatus !== "todas") {
+    base = base.filter(r => (r.situacaoRO || "Status não informado") === filtroStatus);
+  }
+
+  // filtro de motivo
+  if (filtroMotivo !== "todos") {
+    base = base.filter(r => (r.motivo || "Motivo não informado") === filtroMotivo);
+  }
+
+  dadosFiltrados = base;
   atualizarDashboard();
 }
 
@@ -159,6 +188,17 @@ function atualizarDashboard() {
   document.getElementById("totalTon").textContent = somaTon.toFixed(1);
   document.getElementById("totalM2").textContent = somaM2.toFixed(1);
   document.getElementById("percentFP").textContent = percFP.toFixed(0) + "%";
+
+  // Subtítulo com filtros ativos
+  let txtStatus =
+    filtroStatus === "todas" ? "Status: Todos" :
+    filtroStatus === "sem_situacao" ? "Status: Sem situação" :
+    `Status: ${filtroStatus}`;
+  let txtMotivo =
+    filtroMotivo === "todos" ? "Motivo: Todos" :
+    `Motivo: ${filtroMotivo}`;
+  document.getElementById("subtitle").innerHTML =
+    `Dados carregados automaticamente do arquivo: <b>dados.csv</b> — filtros ativos: ${txtStatus} | ${txtMotivo}`;
 
   // Tabela
   preencherTabela(base);
@@ -216,7 +256,21 @@ function desenharGraficos(base) {
     },
     options: {
       responsive: true,
-      scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+      scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } },
+      plugins: { legend: { display: false } },
+      onClick: (evt, elements) => {
+        if (!elements.length) return;
+        const idx = elements[0].index;
+        const motivoClicado = motivos[idx];
+
+        // se clicar de novo no mesmo motivo, limpa o filtro
+        if (filtroMotivo === motivoClicado) {
+          filtroMotivo = "todos";
+        } else {
+          filtroMotivo = motivoClicado;
+        }
+        aplicarFiltrosCombinados();
+      }
     }
   });
 
@@ -241,11 +295,19 @@ function desenharGraficos(base) {
     },
     options: {
       responsive: true,
+      plugins: { legend: { position: "bottom" } },
       onClick: (evt, elements) => {
         if (!elements.length) return;
         const idx = elements[0].index;
         const statusClicado = status[idx];
-        aplicarFiltroStatus(statusClicado);
+
+        // se clicar no mesmo status de novo, volta para "todas"
+        if (filtroStatus === statusClicado) {
+          filtroStatus = "todas";
+        } else {
+          filtroStatus = statusClicado;
+        }
+        aplicarFiltrosCombinados();
       }
     }
   });
@@ -261,21 +323,18 @@ function montarBotoesStatus() {
     const btn = document.createElement("button");
     btn.className = "filter-btn";
     btn.textContent = s;
-    btn.onclick = () => aplicarFiltroStatus(s);
+    btn.onclick = () => {
+      filtroStatus = s;
+      aplicarFiltrosCombinados();
+    };
     container.appendChild(btn);
   });
 }
 
-/* Filtro por status */
+/* Filtro por status chamado pelos botões superiores */
 function aplicarFiltroStatus(valor) {
-  if (valor === "todas") {
-    dadosFiltrados = [...dadosOriginais];
-  } else if (valor === "sem_situacao") {
-    dadosFiltrados = dadosOriginais.filter(r => !r.situacaoRO || r.situacaoRO === "Status não informado");
-  } else {
-    dadosFiltrados = dadosOriginais.filter(r => (r.situacaoRO || "Status não informado") === valor);
-  }
-  atualizarDashboard();
+  filtroStatus = valor;
+  aplicarFiltrosCombinados();
 }
 </script>
 
