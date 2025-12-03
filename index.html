@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard RO – Reclamações</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f4f4f8; margin:0; padding:20px }
+    h1 { margin-top:0 }
+    .card {
+      background:#fff; padding:18px; border-radius:10px; margin:10px;
+      box-shadow:0 0 8px #0001; display:inline-block; min-width:260px; text-align:center;
+    }
+    .card h3 { margin:0; font-size:1.05rem; color:#222 }
+    .card span { font-size:1.8rem; font-weight:bold; color:#1a73e8 }
+    .section {
+      background:#fff; border-radius:10px; padding:10px 14px;
+      margin-top:18px; box-shadow:0 0 8px #0001
+    }
+    canvas { width:100% !important; max-height:360px }
+    table { width:100%; border-collapse:collapse; margin-top:10px }
+    th, td { padding:8px; border:1px solid #ccc; font-size:.9rem }
+    th { background:#eafbff }
+    .filter-btn {
+      background:#1a73e8; color:#fff; border:none; padding:7px 14px;
+      margin:5px 5px 0 0; border-radius:6px; cursor:pointer; font-size:.85rem;
+    }
+    .filter-btn.secondary { background:#555 }
+  </style>
+</head>
+
+<body>
+
+<h1>Dashboard RO – Reclamações</h1>
+<p>Dados carregados automaticamente do arquivo: <b>dados.csv</b></p>
+
+<!-- Indicadores -->
+<div style="display:flex;flex-wrap:wrap">
+  <div class="card"><h3>Total de ROs</h3><span id="totalROs">0</span></div>
+  <div class="card"><h3>Tons Reclamados</h3><span id="totalTon">0.0</span></div>
+  <div class="card"><h3>Área Reclamada (m²)</h3><span id="totalM2">0.0</span></div>
+  <div class="card"><h3>% com FP Realizado</h3><span id="percentFP">0%</span></div>
+</div>
+
+<!-- Filtros por Status -->
+<div class="section">
+  <button class="filter-btn secondary" onclick="aplicarFiltroStatus('todas')">Todas</button>
+  <button class="filter-btn secondary" onclick="aplicarFiltroStatus('sem_situacao')">Sem Situação</button>
+  <span id="statusBtns"></span>
+</div>
+
+<!-- Gráficos -->
+<div style="display:flex; gap:15px; flex-wrap:wrap">
+  <div class="section" style="flex:1">
+    <h3>ROs por Motivo</h3>
+    <canvas id="motivoChart"></canvas>
+  </div>
+  <div class="section" style="flex:1">
+    <h3>ROs por Situação Atual</h3>
+    <canvas id="statusChart"></canvas>
+  </div>
+</div>
+
+<!-- Tabela -->
+<div class="section">
+  <h3>Detalhamento das Reclamações</h3>
+  <table id="tabelaRO">
+    <thead>
+      <tr>
+        <th>Nº RO</th>
+        <th>Cliente</th>
+        <th>Data Abertura</th>
+        <th>Motivo</th>
+        <th>Situação Atual RO</th>
+        <th>Qtd FP</th>
+        <th>Último FP</th>
+        <th>Tons</th>
+        <th>m²</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+let dadosOriginais = [];
+let dadosFiltrados = [];
+let motivoChart, statusChart;
+
+/* Remove BOM invisível e espaços */
+function limparCampo(str) {
+  if (!str) return "";
+  return str.replace("\ufeff", "").trim();
+}
+
+/* Carrega CSV do GitHub */
+fetch("dados.csv")
+  .then(res => res.text())
+  .then(texto => processarCSV(texto))
+  .catch(err => {
+    console.error("Erro ao carregar CSV:", err);
+  });
+
+function processarCSV(csv) {
+  const linhasBrutas = csv.split(/\r?\n/).filter(l => l.trim() !== "");
+  if (linhasBrutas.length < 2) return;
+
+  // Detecta se separador é ; ou ,
+  const primeiraLinha = linhasBrutas[0];
+  const delimitador = primeiraLinha.includes(";") ? ";" : ",";
+
+  const linhasDados = linhasBrutas.slice(1); // ignora cabeçalho
+
+  dadosOriginais = linhasDados.map(linha => {
+    const cols = linha.split(delimitador);
+
+    function val(i) {
+      if (i >= cols.length) return "";
+      return limparCampo(cols[i]);
+    }
+    function num(i) {
+      const v = val(i).replace(".", "").replace(",", ".");
+      const n = parseFloat(v);
+      return isNaN(n) ? 0 : n;
+    }
+
+    // POSIÇÕES FIXAS (baseadas na sua planilha)
+    const cliente        = val(0);
+    const numeroRO       = val(1);
+    const dataAbertura   = val(2);
+    const motivo         = val(6) || "Motivo não informado";
+    const situacaoRO     = val(10) || "Status não informado";
+    const qtdFP          = val(11);
+    const ultFP          = val(12);
+    const ton            = num(7);
+    const m2             = num(8);
+
+    if (!numeroRO) return null; // pula linhas vazias
+
+    return { cliente, numeroRO, dataAbertura, motivo, situacaoRO, qtdFP, ultFP, ton, m2 };
+  }).filter(r => r !== null);
+
+  dadosFiltrados = [...dadosOriginais];
+  atualizarDashboard();
+}
+
+/* Atualiza cards, tabela e gráficos */
+function atualizarDashboard() {
+  const base = dadosFiltrados;
+
+  // Cards
+  const total = base.length;
+  const somaTon = base.reduce((t, r) => t + (r.ton || 0), 0);
+  const somaM2 = base.reduce((t, r) => t + (r.m2 || 0), 0);
+  const comFP = base.filter(r => parseFloat(r.qtdFP || "0") > 0).length;
+  const percFP = total > 0 ? (comFP / total) * 100 : 0;
+
+  document.getElementById("totalROs").textContent = total;
+  document.getElementById("totalTon").textContent = somaTon.toFixed(1);
+  document.getElementById("totalM2").textContent = somaM2.toFixed(1);
+  document.getElementById("percentFP").textContent = percFP.toFixed(0) + "%";
+
+  // Tabela
+  preencherTabela(base);
+
+  // Gráficos
+  desenharGraficos(base);
+
+  // Botões de status dinâmicos
+  montarBotoesStatus();
+}
+
+/* Preenche tabela */
+function preencherTabela(base) {
+  const tbody = document.querySelector("#tabelaRO tbody");
+  tbody.innerHTML = "";
+
+  base.forEach(r => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${r.numeroRO}</td>
+      <td>${r.cliente}</td>
+      <td>${r.dataAbertura}</td>
+      <td>${r.motivo}</td>
+      <td>${r.situacaoRO}</td>
+      <td>${r.qtdFP}</td>
+      <td>${r.ultFP}</td>
+      <td>${r.ton.toFixed(2)}</td>
+      <td>${r.m2.toFixed(2)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+/* Desenha gráficos motivo + status */
+function desenharGraficos(base) {
+  // Motivo
+  const countMotivo = {};
+  base.forEach(r => {
+    const key = r.motivo || "Motivo não informado";
+    countMotivo[key] = (countMotivo[key] || 0) + 1;
+  });
+  const motivos = Object.keys(countMotivo);
+  const qtdMotivo = Object.values(countMotivo);
+
+  if (motivoChart) motivoChart.destroy();
+  motivoChart = new Chart(document.getElementById("motivoChart"), {
+    type: "bar",
+    data: {
+      labels: motivos,
+      datasets: [{
+        label: "Qtd de ROs",
+        data: qtdMotivo,
+        backgroundColor: "#4aa3ff"
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+    }
+  });
+
+  // Status
+  const countStatus = {};
+  base.forEach(r => {
+    const key = r.situacaoRO || "Status não informado";
+    countStatus[key] = (countStatus[key] || 0) + 1;
+  });
+  const status = Object.keys(countStatus);
+  const qtdStatus = Object.values(countStatus);
+
+  if (statusChart) statusChart.destroy();
+  statusChart = new Chart(document.getElementById("statusChart"), {
+    type: "doughnut",
+    data: {
+      labels: status,
+      datasets: [{
+        data: qtdStatus,
+        backgroundColor: ["#4aa3ff","#ff7597","#ffc85b","#68d391","#9d4edd","#f97316"]
+      }]
+    },
+    options: {
+      responsive: true,
+      onClick: (evt, elements) => {
+        if (!elements.length) return;
+        const idx = elements[0].index;
+        const statusClicado = status[idx];
+        aplicarFiltroStatus(statusClicado);
+      }
+    }
+  });
+}
+
+/* Monta botões de status dinamicamente */
+function montarBotoesStatus() {
+  const container = document.getElementById("statusBtns");
+  container.innerHTML = "";
+
+  const statusUnicos = [...new Set(dadosOriginais.map(r => r.situacaoRO || "Status não informado"))];
+  statusUnicos.forEach(s => {
+    const btn = document.createElement("button");
+    btn.className = "filter-btn";
+    btn.textContent = s;
+    btn.onclick = () => aplicarFiltroStatus(s);
+    container.appendChild(btn);
+  });
+}
+
+/* Filtro por status */
+function aplicarFiltroStatus(valor) {
+  if (valor === "todas") {
+    dadosFiltrados = [...dadosOriginais];
+  } else if (valor === "sem_situacao") {
+    dadosFiltrados = dadosOriginais.filter(r => !r.situacaoRO || r.situacaoRO === "Status não informado");
+  } else {
+    dadosFiltrados = dadosOriginais.filter(r => (r.situacaoRO || "Status não informado") === valor);
+  }
+  atualizarDashboard();
+}
+</script>
+
+</body>
+</html>
