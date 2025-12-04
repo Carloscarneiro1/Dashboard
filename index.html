@@ -1,342 +1,960 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Dashboard RO – Reclamações</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
-    body { font-family: Arial, sans-serif; background:#f4f4f8; margin:0; padding:20px }
-    h1 { margin-top:0 }
+    :root {
+      --bg-main: #0f172a;
+      --bg-surface: #020617;
+      --bg-card: #020617;
+      --border-soft: #1f2937;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --danger: #f97373;
+    }
+
+    body.light {
+      --bg-main: #f3f4f6;
+      --bg-surface: #e5e7eb;
+      --bg-card: #ffffff;
+      --border-soft: #e5e7eb;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --danger: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #1e293b 0, var(--bg-main) 45%, #020617 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .title-block h1 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title-pill {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 999px;
+      padding: 2px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      width: fit-content;
+    }
+
+    .title-block p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--text-main);
+      padding: 6px 13px;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    body.light .btn {
+      background: var(--bg-card);
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-soft);
+    }
+
+    .btn-icon {
+      font-size: 14px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      padding: 4px 9px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    body.light .chip {
+      background: var(--bg-card);
+    }
+
+    .chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 960px) {
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .cards {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .shell {
+        padding-inline: 12px;
+      }
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
     .card {
-      background:#fff; padding:18px; border-radius:10px; margin:10px;
-      box-shadow:0 0 8px #0001; display:inline-block; min-width:260px; text-align:center;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), var(--bg-card));
+      border-radius: 16px;
+      padding: 12px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
     }
-    .card h3 { margin:0; font-size:1.05rem; color:#222 }
-    .card span { font-size:1.8rem; font-weight:bold; color:#1a73e8 }
-    .section {
-      background:#fff; border-radius:10px; padding:10px 14px;
-      margin-top:18px; box-shadow:0 0 8px #0001
+
+    body.light .card {
+      background: linear-gradient(145deg, #ffffff, #f1f5f9);
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.12);
     }
-    canvas { width:100% !important; max-height:360px }
-    table { width:100%; border-collapse:collapse; margin-top:10px }
-    th, td { padding:8px; border:1px solid #ccc; font-size:.9rem }
-    th { background:#eafbff }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(148, 163, 184, 0.35), transparent 55%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .card-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.75);
+      color: var(--accent);
+      font-size: 14px;
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.5);
+    }
+
+    body.light .card-icon {
+      background: var(--accent-soft);
+    }
+
+    .card-value {
+      font-size: 22px;
+      font-weight: 700;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .card-unit {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .card-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill-soft {
+      font-size: 10px;
+      border-radius: 999px;
+      padding: 2px 8px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: var(--text-muted);
+    }
+
+    body.light .pill-soft {
+      background: rgba(248, 250, 252, 0.9);
+    }
+
+    .layout-main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
+      gap: 14px;
+      margin-top: 8px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 1040px) {
+      .layout-main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .panel {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), var(--bg-card));
+      border-radius: 18px;
+      padding: 12px 14px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
+    }
+
+    body.light .panel {
+      background: linear-gradient(145deg, #ffffff, #f9fafb);
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.12);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .panel-header h3 {
+      margin: 0;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-header p {
+      margin: 2px 0 0;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .panel-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+    }
+
+    .filters-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
     .filter-btn {
-      background:#1a73e8; color:#fff; border:none; padding:7px 14px;
-      margin:5px 5px 0 0; border-radius:6px; cursor:pointer; font-size:.85rem;
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-muted);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 4px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.15s ease;
     }
-    .filter-btn.secondary { background:#555 }
-    .subtitle { font-size:.85rem; color:#555; margin-bottom:8px }
+
+    body.light .filter-btn {
+      background: rgba(248, 250, 252, 0.95);
+    }
+
+    .filter-btn.secondary {
+      background: transparent;
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      color: #f9fafb;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-soft);
+    }
+
+    .filter-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 960px) {
+      .charts-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    canvas {
+      width: 100% !important;
+      max-height: 320px;
+    }
+
+    .table-panel {
+      margin-top: 4px;
+    }
+
+    .table-wrapper {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.75);
+    }
+
+    body.light .table-wrapper {
+      background: #ffffff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+    }
+
+    thead {
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.18), rgba(37, 99, 235, 0.3));
+      color: #0b1220;
+    }
+
+    body.light thead {
+      color: #0b1220;
+    }
+
+    th, td {
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+      text-align: left;
+    }
+
+    tbody tr:nth-child(every-2) {}
+
+    tbody tr:hover {
+      background: rgba(148, 163, 184, 0.22);
+    }
+
+    body.light tbody tr:hover {
+      background: rgba(191, 219, 254, 0.45);
+    }
+
+    .status-pill {
+      font-size: 10px;
+      border-radius: 999px;
+      padding: 2px 7px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--text-muted);
+      max-width: 170px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    body.light .status-pill {
+      background: rgba(248, 250, 252, 0.95);
+    }
+
+    .status-pill.danger {
+      border-color: var(--danger);
+      color: var(--danger);
+      background: rgba(239, 68, 68, 0.08);
+    }
+
+    .metric-badge {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .mode-label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin: 0 0 4px;
+    }
+
+    .subtitle b {
+      color: var(--accent);
+      font-weight: 600;
+    }
   </style>
 </head>
 
-<body>
+<body class="dark">
+  <div class="shell">
+    <div class="top-bar">
+      <div class="title-block">
+        <div class="title-pill">
+          <span class="chip-dot"></span>
+          DASHBOARD RO · RECLAMAÇÕES
+        </div>
+        <h1>
+          Visão Dinâmica de Reclamações
+        </h1>
+        <p id="subtitle">
+          Dados carregados automaticamente de <b>dados.csv</b> — filtros ativos: Status: Todos | Motivo: Todos
+        </p>
+      </div>
+      <div class="top-actions">
+        <button class="btn" id="themeToggle">
+          <span class="btn-icon">🌙</span>
+          <span class="mode-label">Tema escuro</span>
+        </button>
+        <span class="chip">
+          <span class="chip-dot"></span>
+          Atualização por base CSV · Leitura somente
+        </span>
+      </div>
+    </div>
 
-<h1>Dashboard RO – Reclamações</h1>
-<p class="subtitle" id="subtitle">
-  Dados carregados automaticamente do arquivo: <b>dados.csv</b> — filtros ativos: Nenhum
-</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <span class="card-label">Total de ROs</span>
+            <div class="card-icon">📊</div>
+          </div>
+          <div class="card-value">
+            <span id="totalROs">0</span>
+          </div>
+          <div class="card-sub">
+            <span>Quantidade de registros na base filtrada</span>
+            <span class="pill-soft">Base consolidada</span>
+          </div>
+        </div>
+      </div>
 
-<!-- Indicadores -->
-<div style="display:flex;flex-wrap:wrap">
-  <div class="card"><h3>Total de ROs</h3><span id="totalROs">0</span></div>
-  <div class="card"><h3>Tons Reclamados</h3><span id="totalTon">0.0</span></div>
-  <div class="card"><h3>Área Reclamada (m²)</h3><span id="totalM2">0.0</span></div>
-  <div class="card"><h3>% com FP Realizado</h3><span id="percentFP">0%</span></div>
-</div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <span class="card-label">Toneladas reclamadas</span>
+            <div class="card-icon">⚖️</div>
+          </div>
+          <div class="card-value">
+            <span id="totalTon">0.0</span>
+            <span class="card-unit">t</span>
+          </div>
+          <div class="card-sub">
+            <span>Carga total envolvida nas reclamações</span>
+            <span class="pill-soft metric-badge">Origem: campo “Reclamado Ton”</span>
+          </div>
+        </div>
+      </div>
 
-<!-- Filtros por Status -->
-<div class="section">
-  <button class="filter-btn secondary" onclick="aplicarFiltroStatus('todas')">Todas</button>
-  <button class="filter-btn secondary" onclick="aplicarFiltroStatus('sem_situacao')">Sem Situação</button>
-  <span id="statusBtns"></span>
-</div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <span class="card-label">Área reclamada</span>
+            <div class="card-icon">📐</div>
+          </div>
+          <div class="card-value">
+            <span id="totalM2">0.0</span>
+            <span class="card-unit">m²</span>
+          </div>
+          <div class="card-sub">
+            <span>Equivalente em área dos materiais reclamados</span>
+            <span class="pill-soft metric-badge">Origem: campo “Reclamado M2”</span>
+          </div>
+        </div>
+      </div>
 
-<!-- Gráficos -->
-<div style="display:flex; gap:15px; flex-wrap:wrap">
-  <div class="section" style="flex:1">
-    <h3>ROs por Motivo (clique para filtrar)</h3>
-    <canvas id="motivoChart"></canvas>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <span class="card-label">% ROs com FP realizado</span>
+            <div class="card-icon">✅</div>
+          </div>
+          <div class="card-value">
+            <span id="percentFP">0%</span>
+          </div>
+          <div class="card-sub">
+            <span>Reclamações com pelo menos um follow-up (FP)</span>
+            <span class="pill-soft metric-badge">Critério: Qtd FP &gt; 0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-tag">Filtros operacionais</div>
+          <h3>Visão por status de atendimento</h3>
+          <p>Selecione um status ou use os gráficos para detalhar as ROs por situação e por motivo.</p>
+        </div>
+        <div class="filters-inline">
+          <button class="filter-btn secondary" onclick="aplicarFiltroStatus('todas')">
+            <span class="filter-dot"></span> Todas
+          </button>
+          <button class="filter-btn secondary" onclick="aplicarFiltroStatus('sem_situacao')">
+            <span class="filter-dot"></span> Sem situação
+          </button>
+          <span id="statusBtns"></span>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div>
+          <div class="panel-tag" style="margin-bottom:4px;">Motivo</div>
+          <h3 style="margin:0 0 4px;font-size:13px;">ROs por Motivo (clique para filtrar)</h3>
+          <p style="margin:0 0 6px;font-size:11px;color:var(--text-muted);">
+            Clique em qualquer barra para filtrar o detalhamento apenas para aquele motivo.
+          </p>
+          <canvas id="motivoChart"></canvas>
+        </div>
+        <div>
+          <div class="panel-tag" style="margin-bottom:4px;">Situação atual</div>
+          <h3 style="margin:0 0 4px;font-size:13px;">ROs por Situação (clique para filtrar)</h3>
+          <p style="margin:0 0 6px;font-size:11px;color:var(--text-muted);">
+            Clique em uma fatia para focar nas reclamações em determinado estágio.
+          </p>
+          <canvas id="statusChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel table-panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-tag">Detalhamento operacional</div>
+          <h3>Reclamações em detalhe</h3>
+          <p>Visão linha a linha das ROs, respeitando os filtros de status e motivo aplicados acima.</p>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table id="tabelaRO">
+          <thead>
+            <tr>
+              <th>Nº RO</th>
+              <th>Cliente</th>
+              <th>Data Abertura</th>
+              <th>Motivo</th>
+              <th>Situação Atual RO</th>
+              <th>Qtd FP</th>
+              <th>Último FP</th>
+              <th>Tons</th>
+              <th>m²</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
   </div>
-  <div class="section" style="flex:1">
-    <h3>ROs por Situação Atual (clique para filtrar)</h3>
-    <canvas id="statusChart"></canvas>
-  </div>
-</div>
 
-<!-- Tabela -->
-<div class="section">
-  <h3>Detalhamento das Reclamações</h3>
-  <table id="tabelaRO">
-    <thead>
-      <tr>
-        <th>Nº RO</th>
-        <th>Cliente</th>
-        <th>Data Abertura</th>
-        <th>Motivo</th>
-        <th>Situação Atual RO</th>
-        <th>Qtd FP</th>
-        <th>Último FP</th>
-        <th>Tons</th>
-        <th>m²</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
+  <script>
+    let dadosOriginais = [];
+    let dadosFiltrados = [];
+    let motivoChart, statusChart;
 
-<script>
-let dadosOriginais = [];
-let dadosFiltrados = [];
-let motivoChart, statusChart;
+    // filtros atuais
+    let filtroStatus = "todas"; // 'todas', 'sem_situacao' ou status específico
+    let filtroMotivo = "todos"; // 'todos' ou motivo específico
 
-// filtros atuais
-let filtroStatus = "todas"; // 'todas', 'sem_situacao' ou status específico
-let filtroMotivo = "todos"; // 'todos' ou motivo específico
-
-/* Remove BOM invisível e espaços */
-function limparCampo(str) {
-  if (!str) return "";
-  return str.replace("\ufeff", "").trim();
-}
-
-/* Carrega CSV do GitHub */
-fetch("dados.csv")
-  .then(res => res.text())
-  .then(texto => processarCSV(texto))
-  .catch(err => {
-    console.error("Erro ao carregar CSV:", err);
-    document.getElementById("subtitle").textContent =
-      "Erro ao carregar dados.csv: " + err.message;
-  });
-
-function processarCSV(csv) {
-  const linhasBrutas = csv.split(/\r?\n/).filter(l => l.trim() !== "");
-  if (linhasBrutas.length < 2) return;
-
-  // Detecta se separador é ; ou ,
-  const primeiraLinha = linhasBrutas[0];
-  const delimitador = primeiraLinha.includes(";") ? ";" : ",";
-
-  const linhasDados = linhasBrutas.slice(1); // ignora cabeçalho
-
-  dadosOriginais = linhasDados.map(linha => {
-    const cols = linha.split(delimitador);
-
-    function val(i) {
-      if (i >= cols.length) return "";
-      return limparCampo(cols[i]);
-    }
-    function num(i) {
-      const v = val(i).replace(".", "").replace(",", ".");
-      const n = parseFloat(v);
-      return isNaN(n) ? 0 : n;
+    /* Remove BOM invisível e espaços */
+    function limparCampo(str) {
+      if (!str) return "";
+      return str.replace("\ufeff", "").trim();
     }
 
-    // POSIÇÕES FIXAS (baseadas na sua planilha)
-    const cliente        = val(0);
-    const numeroRO       = val(1);
-    const dataAbertura   = val(2);
-    const motivo         = val(6) || "Motivo não informado";
-    const situacaoRO     = val(10) || "Status não informado";
-    const qtdFP          = val(11);
-    const ultFP          = val(12);
-    const ton            = num(7);
-    const m2             = num(8);
+    /* Carrega CSV do GitHub */
+    fetch("dados.csv")
+      .then(res => res.text())
+      .then(texto => processarCSV(texto))
+      .catch(err => {
+        console.error("Erro ao carregar CSV:", err);
+        document.getElementById("subtitle").textContent =
+          "Erro ao carregar dados.csv: " + err.message;
+      });
 
-    if (!numeroRO) return null; // pula linhas vazias
+    function processarCSV(csv) {
+      const linhasBrutas = csv.split(/\r?\n/).filter(l => l.trim() !== "");
+      if (linhasBrutas.length < 2) return;
 
-    return { cliente, numeroRO, dataAbertura, motivo, situacaoRO, qtdFP, ultFP, ton, m2 };
-  }).filter(r => r !== null);
+      // Detecta se separador é ; ou ,
+      const primeiraLinha = linhasBrutas[0];
+      const delimitador = primeiraLinha.includes(";") ? ";" : ",";
 
-  // aplica filtros iniciais
-  aplicarFiltrosCombinados();
-}
+      const linhasDados = linhasBrutas.slice(1); // ignora cabeçalho
 
-/* Aplica filtros de status + motivo e atualiza dashboard */
-function aplicarFiltrosCombinados() {
-  let base = [...dadosOriginais];
+      dadosOriginais = linhasDados.map(linha => {
+        const cols = linha.split(delimitador);
 
-  // filtro de status
-  if (filtroStatus === "sem_situacao") {
-    base = base.filter(r => !r.situacaoRO || r.situacaoRO === "Status não informado");
-  } else if (filtroStatus !== "todas") {
-    base = base.filter(r => (r.situacaoRO || "Status não informado") === filtroStatus);
-  }
-
-  // filtro de motivo
-  if (filtroMotivo !== "todos") {
-    base = base.filter(r => (r.motivo || "Motivo não informado") === filtroMotivo);
-  }
-
-  dadosFiltrados = base;
-  atualizarDashboard();
-}
-
-/* Atualiza cards, tabela e gráficos */
-function atualizarDashboard() {
-  const base = dadosFiltrados;
-
-  // Cards
-  const total = base.length;
-  const somaTon = base.reduce((t, r) => t + (r.ton || 0), 0);
-  const somaM2 = base.reduce((t, r) => t + (r.m2 || 0), 0);
-  const comFP = base.filter(r => parseFloat(r.qtdFP || "0") > 0).length;
-  const percFP = total > 0 ? (comFP / total) * 100 : 0;
-
-  document.getElementById("totalROs").textContent = total;
-  document.getElementById("totalTon").textContent = somaTon.toFixed(1);
-  document.getElementById("totalM2").textContent = somaM2.toFixed(1);
-  document.getElementById("percentFP").textContent = percFP.toFixed(0) + "%";
-
-  // Subtítulo com filtros ativos
-  let txtStatus =
-    filtroStatus === "todas" ? "Status: Todos" :
-    filtroStatus === "sem_situacao" ? "Status: Sem situação" :
-    `Status: ${filtroStatus}`;
-  let txtMotivo =
-    filtroMotivo === "todos" ? "Motivo: Todos" :
-    `Motivo: ${filtroMotivo}`;
-  document.getElementById("subtitle").innerHTML =
-    `Dados carregados automaticamente do arquivo: <b>dados.csv</b> — filtros ativos: ${txtStatus} | ${txtMotivo}`;
-
-  // Tabela
-  preencherTabela(base);
-
-  // Gráficos
-  desenharGraficos(base);
-
-  // Botões de status dinâmicos
-  montarBotoesStatus();
-}
-
-/* Preenche tabela */
-function preencherTabela(base) {
-  const tbody = document.querySelector("#tabelaRO tbody");
-  tbody.innerHTML = "";
-
-  base.forEach(r => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${r.numeroRO}</td>
-      <td>${r.cliente}</td>
-      <td>${r.dataAbertura}</td>
-      <td>${r.motivo}</td>
-      <td>${r.situacaoRO}</td>
-      <td>${r.qtdFP}</td>
-      <td>${r.ultFP}</td>
-      <td>${r.ton.toFixed(2)}</td>
-      <td>${r.m2.toFixed(2)}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-/* Desenha gráficos motivo + status */
-function desenharGraficos(base) {
-  // Motivo
-  const countMotivo = {};
-  base.forEach(r => {
-    const key = r.motivo || "Motivo não informado";
-    countMotivo[key] = (countMotivo[key] || 0) + 1;
-  });
-  const motivos = Object.keys(countMotivo);
-  const qtdMotivo = Object.values(countMotivo);
-
-  if (motivoChart) motivoChart.destroy();
-  motivoChart = new Chart(document.getElementById("motivoChart"), {
-    type: "bar",
-    data: {
-      labels: motivos,
-      datasets: [{
-        label: "Qtd de ROs",
-        data: qtdMotivo,
-        backgroundColor: "#4aa3ff"
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } },
-      plugins: { legend: { display: false } },
-      onClick: (evt, elements) => {
-        if (!elements.length) return;
-        const idx = elements[0].index;
-        const motivoClicado = motivos[idx];
-
-        // se clicar de novo no mesmo motivo, limpa o filtro
-        if (filtroMotivo === motivoClicado) {
-          filtroMotivo = "todos";
-        } else {
-          filtroMotivo = motivoClicado;
+        function val(i) {
+          if (i >= cols.length) return "";
+          return limparCampo(cols[i]);
         }
-        aplicarFiltrosCombinados();
-      }
-    }
-  });
-
-  // Status
-  const countStatus = {};
-  base.forEach(r => {
-    const key = r.situacaoRO || "Status não informado";
-    countStatus[key] = (countStatus[key] || 0) + 1;
-  });
-  const status = Object.keys(countStatus);
-  const qtdStatus = Object.values(countStatus);
-
-  if (statusChart) statusChart.destroy();
-  statusChart = new Chart(document.getElementById("statusChart"), {
-    type: "doughnut",
-    data: {
-      labels: status,
-      datasets: [{
-        data: qtdStatus,
-        backgroundColor: ["#4aa3ff","#ff7597","#ffc85b","#68d391","#9d4edd","#f97316"]
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: { legend: { position: "bottom" } },
-      onClick: (evt, elements) => {
-        if (!elements.length) return;
-        const idx = elements[0].index;
-        const statusClicado = status[idx];
-
-        // se clicar no mesmo status de novo, volta para "todas"
-        if (filtroStatus === statusClicado) {
-          filtroStatus = "todas";
-        } else {
-          filtroStatus = statusClicado;
+        function num(i) {
+          const v = val(i).replace(".", "").replace(",", ".");
+          const n = parseFloat(v);
+          return isNaN(n) ? 0 : n;
         }
-        aplicarFiltrosCombinados();
-      }
-    }
-  });
-}
 
-/* Monta botões de status dinamicamente */
-function montarBotoesStatus() {
-  const container = document.getElementById("statusBtns");
-  container.innerHTML = "";
+        // POSIÇÕES FIXAS (baseadas na sua planilha)
+        const cliente        = val(0);
+        const numeroRO       = val(1);
+        const dataAbertura   = val(2);
+        const motivo         = val(6) || "Motivo não informado";
+        const situacaoRO     = val(10) || "Status não informado";
+        const qtdFP          = val(11);
+        const ultFP          = val(12);
+        const ton            = num(7);
+        const m2             = num(8);
 
-  const statusUnicos = [...new Set(dadosOriginais.map(r => r.situacaoRO || "Status não informado"))];
-  statusUnicos.forEach(s => {
-    const btn = document.createElement("button");
-    btn.className = "filter-btn";
-    btn.textContent = s;
-    btn.onclick = () => {
-      filtroStatus = s;
+        if (!numeroRO) return null; // pula linhas vazias
+
+        return { cliente, numeroRO, dataAbertura, motivo, situacaoRO, qtdFP, ultFP, ton, m2 };
+      }).filter(r => r !== null);
+
       aplicarFiltrosCombinados();
-    };
-    container.appendChild(btn);
-  });
-}
+    }
 
-/* Filtro por status chamado pelos botões superiores */
-function aplicarFiltroStatus(valor) {
-  filtroStatus = valor;
-  aplicarFiltrosCombinados();
-}
-</script>
+    /* Aplica filtros de status + motivo e atualiza dashboard */
+    function aplicarFiltrosCombinados() {
+      let base = [...dadosOriginais];
 
+      // filtro de status
+      if (filtroStatus === "sem_situacao") {
+        base = base.filter(r => !r.situacaoRO || r.situacaoRO === "Status não informado");
+      } else if (filtroStatus !== "todas") {
+        base = base.filter(r => (r.situacaoRO || "Status não informado") === filtroStatus);
+      }
+
+      // filtro de motivo
+      if (filtroMotivo !== "todos") {
+        base = base.filter(r => (r.motivo || "Motivo não informado") === filtroMotivo);
+      }
+
+      dadosFiltrados = base;
+      atualizarDashboard();
+    }
+
+    /* Atualiza cards, tabela e gráficos */
+    function atualizarDashboard() {
+      const base = dadosFiltrados;
+
+      // Cards
+      const total = base.length;
+      const somaTon = base.reduce((t, r) => t + (r.ton || 0), 0);
+      const somaM2 = base.reduce((t, r) => t + (r.m2 || 0), 0);
+      const comFP = base.filter(r => parseFloat(r.qtdFP || "0") > 0).length;
+      const percFP = total > 0 ? (comFP / total) * 100 : 0;
+
+      document.getElementById("totalROs").textContent = total;
+      document.getElementById("totalTon").textContent = somaTon.toFixed(1);
+      document.getElementById("totalM2").textContent = somaM2.toFixed(1);
+      document.getElementById("percentFP").textContent = percFP.toFixed(0) + "%";
+
+      // Subtítulo com filtros ativos
+      let txtStatus =
+        filtroStatus === "todas" ? "Status: Todos" :
+        filtroStatus === "sem_situacao" ? "Status: Sem situação" :
+        `Status: ${filtroStatus}`;
+      let txtMotivo =
+        filtroMotivo === "todos" ? "Motivo: Todos" :
+        `Motivo: ${filtroMotivo}`;
+      document.getElementById("subtitle").innerHTML =
+        `Dados carregados automaticamente de <b>dados.csv</b> — filtros ativos: ${txtStatus} | ${txtMotivo}`;
+
+      // Tabela
+      preencherTabela(base);
+
+      // Gráficos
+      desenharGraficos(base);
+
+      // Botões de status dinâmicos
+      montarBotoesStatus();
+    }
+
+    /* Preenche tabela */
+    function preencherTabela(base) {
+      const tbody = document.querySelector("#tabelaRO tbody");
+      tbody.innerHTML = "";
+
+      base.forEach(r => {
+        const tr = document.createElement("tr");
+
+        const isCritico =
+          (r.situacaoRO || "").toLowerCase().includes("aguardando") ||
+          (r.situacaoRO || "").toLowerCase().includes("atras");
+
+        tr.innerHTML = `
+          <td>${r.numeroRO}</td>
+          <td>${r.cliente}</td>
+          <td>${r.dataAbertura}</td>
+          <td>${r.motivo}</td>
+          <td>
+            <span class="status-pill ${isCritico ? "danger" : ""}">
+              ${r.situacaoRO}
+            </span>
+          </td>
+          <td>${r.qtdFP}</td>
+          <td>${r.ultFP}</td>
+          <td>${r.ton.toFixed(2)}</td>
+          <td>${r.m2.toFixed(2)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    /* Desenha gráficos motivo + status */
+    function desenharGraficos(base) {
+      // Motivo
+      const countMotivo = {};
+      base.forEach(r => {
+        const key = r.motivo || "Motivo não informado";
+        countMotivo[key] = (countMotivo[key] || 0) + 1;
+      });
+      const motivos = Object.keys(countMotivo);
+      const qtdMotivo = Object.values(countMotivo);
+
+      if (motivoChart) motivoChart.destroy();
+      motivoChart = new Chart(document.getElementById("motivoChart"), {
+        type: "bar",
+        data: {
+          labels: motivos,
+          datasets: [{
+            label: "Qtd de ROs",
+            data: qtdMotivo,
+            backgroundColor: "#38bdf8"
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true, ticks: { stepSize: 1 } },
+            x: { ticks: { maxRotation: 45, minRotation: 0 } }
+          },
+          plugins: { legend: { display: false } },
+          onClick: (evt, elements) => {
+            if (!elements.length) return;
+            const idx = elements[0].index;
+            const motivoClicado = motivos[idx];
+
+            // se clicar de novo no mesmo motivo, limpa o filtro
+            if (filtroMotivo === motivoClicado) {
+              filtroMotivo = "todos";
+            } else {
+              filtroMotivo = motivoClicado;
+            }
+            aplicarFiltrosCombinados();
+          }
+        }
+      });
+
+      // Status
+      const countStatus = {};
+      base.forEach(r => {
+        const key = r.situacaoRO || "Status não informado";
+        countStatus[key] = (countStatus[key] || 0) + 1;
+      });
+      const status = Object.keys(countStatus);
+      const qtdStatus = Object.values(countStatus);
+
+      if (statusChart) statusChart.destroy();
+      statusChart = new Chart(document.getElementById("statusChart"), {
+        type: "doughnut",
+        data: {
+          labels: status,
+          datasets: [{
+            data: qtdStatus,
+            backgroundColor: ["#38bdf8", "#f97373", "#facc15", "#4ade80", "#a855f7", "#fb923c"]
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 11 } } }
+          },
+          onClick: (evt, elements) => {
+            if (!elements.length) return;
+            const idx = elements[0].index;
+            const statusClicado = status[idx];
+
+            // se clicar no mesmo status de novo, volta para "todas"
+            if (filtroStatus === statusClicado) {
+              filtroStatus = "todas";
+            } else {
+              filtroStatus = statusClicado;
+            }
+            aplicarFiltrosCombinados();
+          }
+        }
+      });
+    }
+
+    /* Monta botões de status dinamicamente */
+    function montarBotoesStatus() {
+      const container = document.getElementById("statusBtns");
+      container.innerHTML = "";
+
+      const statusUnicos = [...new Set(dadosOriginais.map(r => r.situacaoRO || "Status não informado"))];
+      statusUnicos.forEach(s => {
+        const btn = document.createElement("button");
+        btn.className = "filter-btn";
+        btn.textContent = s;
+        btn.onclick = () => {
+          filtroStatus = s;
+          aplicarFiltrosCombinados();
+        };
+        if (filtroStatus === s) {
+          btn.classList.add("active");
+        }
+        container.appendChild(btn);
+      });
+    }
+
+    /* Filtro por status chamado pelos botões superiores */
+    function aplicarFiltroStatus(valor) {
+      filtroStatus = valor;
+      aplicarFiltrosCombinados();
+    }
+
+    // ====== TEMA CLARO / ESCURO ======
+    const themeToggle = document.getElementById("themeToggle");
+
+    function aplicaTemaInicial() {
+      const salvo = localStorage.getItem("dashboardTema");
+      if (salvo === "light") {
+        document.body.classList.remove("dark");
+        document.body.classList.add("light");
+        themeToggle.querySelector(".btn-icon").textContent = "☀️";
+        themeToggle.querySelector(".mode-label").textContent = "Tema claro";
+      } else {
+        document.body.classList.remove("light");
+        document.body.classList.add("dark");
+        themeToggle.querySelector(".btn-icon").textContent = "🌙";
+        themeToggle.querySelector(".mode-label").textContent = "Tema escuro";
+      }
+    }
+
+    aplicaTemaInicial();
+
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.body.classList.contains("dark");
+      if (isDark) {
+        document.body.classList.remove("dark");
+        document.body.classList.add("light");
+        themeToggle.querySelector(".btn-icon").textContent = "☀️";
+        themeToggle.querySelector(".mode-label").textContent = "Tema claro";
+        localStorage.setItem("dashboardTema", "light");
+      } else {
+        document.body.classList.remove("light");
+        document.body.classList.add("dark");
+        themeToggle.querySelector(".btn-icon").textContent = "🌙";
+        themeToggle.querySelector(".mode-label").textContent = "Tema escuro";
+        localStorage.setItem("dashboardTema", "dark");
+      }
+    });
+  </script>
 </body>
 </html>
