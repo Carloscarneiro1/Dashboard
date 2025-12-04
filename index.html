@@ -31,9 +31,7 @@
       --danger: #dc2626;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -125,9 +123,7 @@
       box-shadow: 0 0 0 1px var(--accent-soft);
     }
 
-    .btn-icon {
-      font-size: 14px;
-    }
+    .btn-icon { font-size: 14px; }
 
     .chip {
       border-radius: 999px;
@@ -155,28 +151,19 @@
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
       margin-bottom: 16px;
     }
 
     @media (max-width: 960px) {
-      .cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 640px) {
-      .cards {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .shell {
-        padding-inline: 12px;
-      }
-      .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .cards { grid-template-columns: minmax(0, 1fr); }
+      .shell { padding-inline: 12px; }
+      .top-bar { flex-direction: column; align-items: flex-start; }
     }
 
     .card {
@@ -241,9 +228,7 @@
       box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.5);
     }
 
-    body.light .card-icon {
-      background: var(--accent-soft);
-    }
+    body.light .card-icon { background: var(--accent-soft); }
 
     .card-value {
       font-size: 22px;
@@ -280,26 +265,13 @@
       background: rgba(248, 250, 252, 0.9);
     }
 
-    .layout-main {
-      display: grid;
-      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
-      gap: 14px;
-      margin-top: 8px;
-      margin-bottom: 18px;
-    }
-
-    @media (max-width: 1040px) {
-      .layout-main {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
     .panel {
       background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), var(--bg-card));
       border-radius: 18px;
       padding: 12px 14px 14px;
       border: 1px solid rgba(148, 163, 184, 0.25);
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
+      margin-bottom: 16px;
     }
 
     body.light .panel {
@@ -357,13 +329,9 @@
       transition: 0.15s ease;
     }
 
-    body.light .filter-btn {
-      background: rgba(248, 250, 252, 0.95);
-    }
+    body.light .filter-btn { background: rgba(248, 250, 252, 0.95); }
 
-    .filter-btn.secondary {
-      background: transparent;
-    }
+    .filter-btn.secondary { background: transparent; }
 
     .filter-btn.active {
       background: var(--accent);
@@ -387,18 +355,12 @@
     }
 
     @media (max-width: 960px) {
-      .charts-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      .charts-grid { grid-template-columns: minmax(0, 1fr); }
     }
 
     canvas {
       width: 100% !important;
       max-height: 320px;
-    }
-
-    .table-panel {
-      margin-top: 4px;
     }
 
     .table-wrapper {
@@ -408,9 +370,7 @@
       background: rgba(15, 23, 42, 0.75);
     }
 
-    body.light .table-wrapper {
-      background: #ffffff;
-    }
+    body.light .table-wrapper { background: #ffffff; }
 
     table {
       width: 100%;
@@ -423,17 +383,11 @@
       color: #0b1220;
     }
 
-    body.light thead {
-      color: #0b1220;
-    }
-
     th, td {
       padding: 6px 8px;
       border-bottom: 1px solid rgba(148, 163, 184, 0.35);
       text-align: left;
     }
-
-    tbody tr:nth-child(every-2) {}
 
     tbody tr:hover {
       background: rgba(148, 163, 184, 0.22);
@@ -497,11 +451,9 @@
           <span class="chip-dot"></span>
           DASHBOARD RO · RECLAMAÇÕES
         </div>
-        <h1>
-          Visão Dinâmica de Reclamações
-        </h1>
+        <h1>Visão Dinâmica de Reclamações</h1>
         <p id="subtitle">
-          Dados carregados automaticamente de <b>dados.csv</b> — filtros ativos: Status: Todos | Motivo: Todos
+          Dados carregados automaticamente de <b>dados.csv</b> — filtros ativos: Status: Todos | Motivo: Todos | Cliente: Todos | Tempo FP: Todos
         </p>
       </div>
       <div class="top-actions">
@@ -516,6 +468,7 @@
       </div>
     </div>
 
+    <!-- CARDS -->
     <div class="cards">
       <div class="card">
         <div class="card-inner">
@@ -566,30 +519,15 @@
           </div>
         </div>
       </div>
-
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-header">
-            <span class="card-label">% ROs com FP realizado</span>
-            <div class="card-icon">✅</div>
-          </div>
-          <div class="card-value">
-            <span id="percentFP">0%</span>
-          </div>
-          <div class="card-sub">
-            <span>Reclamações com pelo menos um follow-up (FP)</span>
-            <span class="pill-soft metric-badge">Critério: Qtd FP &gt; 0</span>
-          </div>
-        </div>
-      </div>
     </div>
 
+    <!-- FILTROS + MOTIVO/STATUS -->
     <div class="panel">
       <div class="panel-header">
         <div>
           <div class="panel-tag">Filtros operacionais</div>
           <h3>Visão por status de atendimento</h3>
-          <p>Selecione um status ou use os gráficos para detalhar as ROs por situação e por motivo.</p>
+          <p>Use os filtros e gráficos para detalhar as ROs por situação e por motivo.</p>
         </div>
         <div class="filters-inline">
           <button class="filter-btn secondary" onclick="aplicarFiltroStatus('todas')">
@@ -622,12 +560,45 @@
       </div>
     </div>
 
-    <div class="panel table-panel">
+    <!-- NOVOS GRÁFICOS: CLIENTES + TEMPO FP -->
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-tag">Análises complementares</div>
+          <h3>Clientes e tempo de atendimento</h3>
+          <p>
+            Quem concentra mais ROs em aberto e como está o tempo entre a abertura e o último follow-up.
+          </p>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div>
+          <div class="panel-tag" style="margin-bottom:4px;">Clientes com ROs abertas</div>
+          <h3 style="margin:0 0 4px;font-size:13px;">Top clientes com ROs em aberto (clique para filtrar)</h3>
+          <p style="margin:0 0 6px;font-size:11px;color:var(--text-muted);">
+            Considera ROs cuja situação não está marcada como encerrada/concluída/resolvida.
+          </p>
+          <canvas id="clientesAbertosChart"></canvas>
+        </div>
+        <div>
+          <div class="panel-tag" style="margin-bottom:4px;">Tempo entre abertura e último FP</div>
+          <h3 style="margin:0 0 4px;font-size:13px;">Distribuição de tempo (clique para filtrar)</h3>
+          <p style="margin:0 0 6px;font-size:11px;color:var(--text-muted);">
+            Classificação das ROs por faixa de dias entre a data de abertura e a data do último FP.
+          </p>
+          <canvas id="tempoFPChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABELA -->
+    <div class="panel">
       <div class="panel-header">
         <div>
           <div class="panel-tag">Detalhamento operacional</div>
           <h3>Reclamações em detalhe</h3>
-          <p>Visão linha a linha das ROs, respeitando os filtros de status e motivo aplicados acima.</p>
+          <p>Visão linha a linha das ROs, respeitando todos os filtros aplicados acima.</p>
         </div>
       </div>
       <div class="table-wrapper">
@@ -654,16 +625,45 @@
   <script>
     let dadosOriginais = [];
     let dadosFiltrados = [];
-    let motivoChart, statusChart;
+    let motivoChart, statusChart, clientesChart, tempoChart;
 
     // filtros atuais
-    let filtroStatus = "todas"; // 'todas', 'sem_situacao' ou status específico
-    let filtroMotivo = "todos"; // 'todos' ou motivo específico
+    let filtroStatus = "todas";  // 'todas', 'sem_situacao' ou status específico
+    let filtroMotivo = "todos";  // 'todos' ou motivo específico
+    let filtroCliente = "todos"; // 'todos' ou cliente específico
+    let filtroFaixaTempo = "todos"; // 'todos' ou faixa de tempo
 
-    /* Remove BOM invisível e espaços */
+    /* Helpers de data e tempo */
     function limparCampo(str) {
       if (!str) return "";
       return str.replace("\ufeff", "").trim();
+    }
+
+    function parseDataBR(str) {
+      if (!str) return null;
+      const partes = str.split(/[\/\-]/);
+      if (partes.length < 3) return null;
+      const d = parseInt(partes[0], 10);
+      const m = parseInt(partes[1], 10);
+      const y = parseInt(partes[2], 10);
+      const dt = new Date(y, m - 1, d);
+      return isNaN(dt.getTime()) ? null : dt;
+    }
+
+    function diasEntreDatasBR(inicio, fim) {
+      const d1 = parseDataBR(inicio);
+      const d2 = parseDataBR(fim);
+      if (!d1 || !d2) return null;
+      const diffMs = d2 - d1;
+      return diffMs / (1000 * 60 * 60 * 24);
+    }
+
+    function faixaTempoDias(dias) {
+      if (dias == null) return null;
+      if (dias <= 7) return "Até 7 dias";
+      if (dias <= 15) return "8 a 15 dias";
+      if (dias <= 30) return "16 a 30 dias";
+      return "Acima de 30 dias";
     }
 
     /* Carrega CSV do GitHub */
@@ -680,7 +680,6 @@
       const linhasBrutas = csv.split(/\r?\n/).filter(l => l.trim() !== "");
       if (linhasBrutas.length < 2) return;
 
-      // Detecta se separador é ; ou ,
       const primeiraLinha = linhasBrutas[0];
       const delimitador = primeiraLinha.includes(";") ? ";" : ",";
 
@@ -699,7 +698,6 @@
           return isNaN(n) ? 0 : n;
         }
 
-        // POSIÇÕES FIXAS (baseadas na sua planilha)
         const cliente        = val(0);
         const numeroRO       = val(1);
         const dataAbertura   = val(2);
@@ -710,15 +708,34 @@
         const ton            = num(7);
         const m2             = num(8);
 
-        if (!numeroRO) return null; // pula linhas vazias
+        if (!numeroRO) return null;
 
-        return { cliente, numeroRO, dataAbertura, motivo, situacaoRO, qtdFP, ultFP, ton, m2 };
+        const diasFP = diasEntreDatasBR(dataAbertura, ultFP);
+        const faixaTempo = faixaTempoDias(diasFP);
+
+        // considera aberto se não contém palavras de encerramento
+        const aberto = !/encerr|fechad|conclu|resolvi/i.test(situacaoRO || "");
+
+        return {
+          cliente,
+          numeroRO,
+          dataAbertura,
+          motivo,
+          situacaoRO,
+          qtdFP,
+          ultFP,
+          ton,
+          m2,
+          diasFP,
+          faixaTempo,
+          aberto
+        };
       }).filter(r => r !== null);
 
       aplicarFiltrosCombinados();
     }
 
-    /* Aplica filtros de status + motivo e atualiza dashboard */
+    /* Aplica filtros combinados */
     function aplicarFiltrosCombinados() {
       let base = [...dadosOriginais];
 
@@ -734,6 +751,16 @@
         base = base.filter(r => (r.motivo || "Motivo não informado") === filtroMotivo);
       }
 
+      // filtro de cliente
+      if (filtroCliente !== "todos") {
+        base = base.filter(r => (r.cliente || "") === filtroCliente);
+      }
+
+      // filtro de faixa de tempo
+      if (filtroFaixaTempo !== "todos") {
+        base = base.filter(r => r.faixaTempo === filtroFaixaTempo);
+      }
+
       dadosFiltrados = base;
       atualizarDashboard();
     }
@@ -742,19 +769,14 @@
     function atualizarDashboard() {
       const base = dadosFiltrados;
 
-      // Cards
       const total = base.length;
       const somaTon = base.reduce((t, r) => t + (r.ton || 0), 0);
       const somaM2 = base.reduce((t, r) => t + (r.m2 || 0), 0);
-      const comFP = base.filter(r => parseFloat(r.qtdFP || "0") > 0).length;
-      const percFP = total > 0 ? (comFP / total) * 100 : 0;
 
       document.getElementById("totalROs").textContent = total;
       document.getElementById("totalTon").textContent = somaTon.toFixed(1);
       document.getElementById("totalM2").textContent = somaM2.toFixed(1);
-      document.getElementById("percentFP").textContent = percFP.toFixed(0) + "%";
 
-      // Subtítulo com filtros ativos
       let txtStatus =
         filtroStatus === "todas" ? "Status: Todos" :
         filtroStatus === "sem_situacao" ? "Status: Sem situação" :
@@ -762,20 +784,23 @@
       let txtMotivo =
         filtroMotivo === "todos" ? "Motivo: Todos" :
         `Motivo: ${filtroMotivo}`;
+      let txtCliente =
+        filtroCliente === "todos" ? "Cliente: Todos" :
+        `Cliente: ${filtroCliente}`;
+      let txtTempo =
+        filtroFaixaTempo === "todos" ? "Tempo FP: Todos" :
+        `Tempo FP: ${filtroFaixaTempo}`;
+
       document.getElementById("subtitle").innerHTML =
-        `Dados carregados automaticamente de <b>dados.csv</b> — filtros ativos: ${txtStatus} | ${txtMotivo}`;
+        `Dados carregados automaticamente de <b>dados.csv</b> — filtros ativos: ${txtStatus} | ${txtMotivo} | ${txtCliente} | ${txtTempo}`;
 
-      // Tabela
       preencherTabela(base);
-
-      // Gráficos
-      desenharGraficos(base);
-
-      // Botões de status dinâmicos
+      desenharGraficosMotivoStatus(base);
+      desenharGraficosClientesTempo(base);
       montarBotoesStatus();
     }
 
-    /* Preenche tabela */
+    /* Tabela */
     function preencherTabela(base) {
       const tbody = document.querySelector("#tabelaRO tbody");
       tbody.innerHTML = "";
@@ -806,9 +831,8 @@
       });
     }
 
-    /* Desenha gráficos motivo + status */
-    function desenharGraficos(base) {
-      // Motivo
+    /* Gráficos Motivo + Status */
+    function desenharGraficosMotivoStatus(base) {
       const countMotivo = {};
       base.forEach(r => {
         const key = r.motivo || "Motivo não informado";
@@ -840,7 +864,6 @@
             const idx = elements[0].index;
             const motivoClicado = motivos[idx];
 
-            // se clicar de novo no mesmo motivo, limpa o filtro
             if (filtroMotivo === motivoClicado) {
               filtroMotivo = "todos";
             } else {
@@ -851,7 +874,6 @@
         }
       });
 
-      // Status
       const countStatus = {};
       base.forEach(r => {
         const key = r.situacaoRO || "Status não informado";
@@ -880,7 +902,6 @@
             const idx = elements[0].index;
             const statusClicado = status[idx];
 
-            // se clicar no mesmo status de novo, volta para "todas"
             if (filtroStatus === statusClicado) {
               filtroStatus = "todas";
             } else {
@@ -892,7 +913,98 @@
       });
     }
 
-    /* Monta botões de status dinamicamente */
+    /* NOVOS GRÁFICOS: CLIENTES + TEMPO */
+    function desenharGraficosClientesTempo(base) {
+      // clientes com ROs abertas
+      const countClientesAbertos = {};
+      base.forEach(r => {
+        if (!r.aberto) return;
+        const key = r.cliente || "Cliente não informado";
+        countClientesAbertos[key] = (countClientesAbertos[key] || 0) + 1;
+      });
+
+      const clientes = Object.keys(countClientesAbertos);
+      const qtdPorCliente = Object.values(countClientesAbertos);
+
+      if (clientesChart) clientesChart.destroy();
+      clientesChart = new Chart(document.getElementById("clientesAbertosChart"), {
+        type: "bar",
+        data: {
+          labels: clientes,
+          datasets: [{
+            label: "ROs em aberto",
+            data: qtdPorCliente,
+            backgroundColor: "#f97373"
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true, ticks: { stepSize: 1 } },
+            x: { ticks: { maxRotation: 45, minRotation: 0 } }
+          },
+          plugins: { legend: { display: false } },
+          onClick: (evt, elements) => {
+            if (!elements.length) return;
+            const idx = elements[0].index;
+            const clienteClicado = clientes[idx];
+
+            if (filtroCliente === clienteClicado) {
+              filtroCliente = "todos";
+            } else {
+              filtroCliente = clienteClicado;
+            }
+            aplicarFiltrosCombinados();
+          }
+        }
+      });
+
+      // tempo entre abertura e último FP (faixas)
+      const countFaixas = {};
+      base.forEach(r => {
+        if (!r.faixaTempo) return;
+        const key = r.faixaTempo;
+        countFaixas[key] = (countFaixas[key] || 0) + 1;
+      });
+
+      const ordemFaixas = ["Até 7 dias", "8 a 15 dias", "16 a 30 dias", "Acima de 30 dias"];
+      const faixas = ordemFaixas.filter(f => f in countFaixas);
+      const qtdFaixas = faixas.map(f => countFaixas[f]);
+
+      if (tempoChart) tempoChart.destroy();
+      tempoChart = new Chart(document.getElementById("tempoFPChart"), {
+        type: "bar",
+        data: {
+          labels: faixas,
+          datasets: [{
+            label: "Qtd de ROs",
+            data: qtdFaixas,
+            backgroundColor: "#22c55e"
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true, ticks: { stepSize: 1 } }
+          },
+          plugins: { legend: { display: false } },
+          onClick: (evt, elements) => {
+            if (!elements.length) return;
+            const idx = elements[0].index;
+            const faixaClicada = faixas[idx];
+
+            if (filtroFaixaTempo === faixaClicada) {
+              filtroFaixaTempo = "todos";
+            } else {
+              filtroFaixaTempo = faixaClicada;
+            }
+            aplicarFiltrosCombinados();
+          }
+        }
+      });
+    }
+
+    /* Botões de status dinâmicos */
     function montarBotoesStatus() {
       const container = document.getElementById("statusBtns");
       container.innerHTML = "";
@@ -913,13 +1025,12 @@
       });
     }
 
-    /* Filtro por status chamado pelos botões superiores */
     function aplicarFiltroStatus(valor) {
       filtroStatus = valor;
       aplicarFiltrosCombinados();
     }
 
-    // ====== TEMA CLARO / ESCURO ======
+    // TEMA CLARO / ESCURO
     const themeToggle = document.getElementById("themeToggle");
 
     function aplicaTemaInicial() {
