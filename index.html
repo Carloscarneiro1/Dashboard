@@ -372,10 +372,16 @@
 
     body.light .table-wrapper { background: #ffffff; }
 
+    /* NOVO: rolagem horizontal dentro da área da tabela */
+    .table-scroll {
+      overflow-x: auto;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 11.5px;
+      min-width: 900px; /* garante scroll no celular se faltar espaço */
     }
 
     thead {
@@ -602,23 +608,25 @@
         </div>
       </div>
       <div class="table-wrapper">
-        <table id="tabelaRO">
-          <thead>
-            <tr>
-              <th>Nº RO</th>
-              <th>Cliente</th>
-              <th>Data Abertura</th>
-              <th>Motivo</th>
-              <th>Situação Atual RO</th>
-              <th>Qtd FP</th>
-              <th>Último FP</th>
-              <th>Coment. Qualidade</th>
-              <th>Tons</th>
-              <th>m²</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        <div class="table-scroll">
+          <table id="tabelaRO">
+            <thead>
+              <tr>
+                <th>Nº RO</th>
+                <th>Cliente</th>
+                <th>Data Abertura</th>
+                <th>Motivo</th>
+                <th>Situação Atual RO</th>
+                <th>Qtd FP</th>
+                <th>Último FP</th>
+                <th>Coment. Qualidade</th>
+                <th>Tons</th>
+                <th>m²</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -702,7 +710,7 @@
         const motivo            = val(6) || "Motivo não informado";
         const ton               = num(7);
         const m2                = num(8);
-        const comentQualidade   = val(9);    // COLUNA J
+        const comentQualidade   = val(9);    // coluna comentários
         const situacaoRO        = val(10) || "Status não informado";
         const qtdFP             = val(11);
         const ultFP             = val(12);
@@ -824,13 +832,18 @@
     }
 
     function desenharGraficosMotivoStatus(base) {
+      /* ---- MOTIVO EM ORDEM DECRESCENTE ---- */
       const countMotivo = {};
       base.forEach(r => {
         const key = r.motivo || "Motivo não informado";
         countMotivo[key] = (countMotivo[key] || 0) + 1;
       });
-      const motivos = Object.keys(countMotivo);
-      const qtdMotivo = Object.values(countMotivo);
+
+      const paresMotivo = Object.entries(countMotivo)
+        .sort((a, b) => b[1] - a[1]); // ordena do maior para o menor
+
+      const motivos = paresMotivo.map(p => p[0]);
+      const qtdMotivo = paresMotivo.map(p => p[1]);
 
       if (motivoChart) motivoChart.destroy();
       motivoChart = new Chart(document.getElementById("motivoChart"), {
@@ -865,6 +878,7 @@
         }
       });
 
+      /* ---- STATUS (sem alteração) ---- */
       const countStatus = {};
       base.forEach(r => {
         const key = r.situacaoRO || "Status não informado";
@@ -907,14 +921,13 @@
     function desenharGraficosClientesTempo(base) {
       const countClientesAbertos = {};
       base.forEach(r => {
-        if (!r.aberto) return; // só ROs em aberto
+        if (!r.aberto) return;
         const key = r.cliente || "Cliente não informado";
         countClientesAbertos[key] = (countClientesAbertos[key] || 0) + 1;
       });
 
-      // ordenar do maior para o menor
       const paresOrdenados = Object.entries(countClientesAbertos)
-        .sort((a, b) => b[1] - a[1]); // [ [cliente, qtde], ... ]
+        .sort((a, b) => b[1] - a[1]);
 
       const clientes = paresOrdenados.map(p => p[0]);
       const qtdPorCliente = paresOrdenados.map(p => p[1]);
