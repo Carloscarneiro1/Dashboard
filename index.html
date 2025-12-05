@@ -137,9 +137,7 @@
       background: rgba(15, 23, 42, 0.6);
     }
 
-    body.light .chip {
-      background: var(--bg-card);
-    }
+    body.light .chip { background: var(--bg-card); }
 
     .chip-dot {
       width: 7px;
@@ -182,15 +180,6 @@
     body.light .card {
       background: linear-gradient(145deg, #ffffff, #f1f5f9);
       box-shadow: 0 16px 30px rgba(15, 23, 42, 0.12);
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(148, 163, 184, 0.35), transparent 55%);
-      opacity: 0.4;
-      pointer-events: none;
     }
 
     .card-inner {
@@ -389,13 +378,9 @@
       text-align: left;
     }
 
-    tbody tr:hover {
-      background: rgba(148, 163, 184, 0.22);
-    }
+    tbody tr:hover { background: rgba(148, 163, 184, 0.22); }
 
-    body.light tbody tr:hover {
-      background: rgba(191, 219, 254, 0.45);
-    }
+    body.light tbody tr:hover { background: rgba(191, 219, 254, 0.45); }
 
     .status-pill {
       font-size: 10px;
@@ -420,15 +405,9 @@
       background: rgba(239, 68, 68, 0.08);
     }
 
-    .metric-badge {
-      font-size: 10px;
-      color: var(--text-muted);
-    }
+    .metric-badge { font-size: 10px; color: var(--text-muted); }
 
-    .mode-label {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
+    .mode-label { font-size: 11px; color: var(--text-muted); }
 
     .subtitle {
       font-size: 11px;
@@ -612,6 +591,7 @@
               <th>Situação Atual RO</th>
               <th>Qtd FP</th>
               <th>Último FP</th>
+              <th>Coment. Qualidade</th>
               <th>Tons</th>
               <th>m²</th>
             </tr>
@@ -627,13 +607,11 @@
     let dadosFiltrados = [];
     let motivoChart, statusChart, clientesChart, tempoChart;
 
-    // filtros atuais
-    let filtroStatus = "todas";  // 'todas', 'sem_situacao' ou status específico
-    let filtroMotivo = "todos";  // 'todos' ou motivo específico
-    let filtroCliente = "todos"; // 'todos' ou cliente específico
-    let filtroFaixaTempo = "todos"; // 'todos' ou faixa de tempo
+    let filtroStatus = "todas";
+    let filtroMotivo = "todos";
+    let filtroCliente = "todos";
+    let filtroFaixaTempo = "todos";
 
-    /* Helpers de data e tempo */
     function limparCampo(str) {
       if (!str) return "";
       return str.replace("\ufeff", "").trim();
@@ -666,7 +644,6 @@
       return "Acima de 30 dias";
     }
 
-    /* Carrega CSV do GitHub */
     fetch("dados.csv")
       .then(res => res.text())
       .then(texto => processarCSV(texto))
@@ -683,7 +660,7 @@
       const primeiraLinha = linhasBrutas[0];
       const delimitador = primeiraLinha.includes(";") ? ";" : ",";
 
-      const linhasDados = linhasBrutas.slice(1); // ignora cabeçalho
+      const linhasDados = linhasBrutas.slice(1);
 
       dadosOriginais = linhasDados.map(linha => {
         const cols = linha.split(delimitador);
@@ -707,13 +684,13 @@
         const ultFP          = val(12);
         const ton            = num(7);
         const m2             = num(8);
+        const comentQualidade = val(13); // <- AJUSTE O ÍNDICE AQUI SE PRECISAR
 
         if (!numeroRO) return null;
 
         const diasFP = diasEntreDatasBR(dataAbertura, ultFP);
         const faixaTempo = faixaTempoDias(diasFP);
 
-        // considera aberto se não contém palavras de encerramento
         const aberto = !/encerr|fechad|conclu|resolvi/i.test(situacaoRO || "");
 
         return {
@@ -726,6 +703,7 @@
           ultFP,
           ton,
           m2,
+          comentQualidade,
           diasFP,
           faixaTempo,
           aberto
@@ -735,28 +713,23 @@
       aplicarFiltrosCombinados();
     }
 
-    /* Aplica filtros combinados */
     function aplicarFiltrosCombinados() {
       let base = [...dadosOriginais];
 
-      // filtro de status
       if (filtroStatus === "sem_situacao") {
         base = base.filter(r => !r.situacaoRO || r.situacaoRO === "Status não informado");
       } else if (filtroStatus !== "todas") {
         base = base.filter(r => (r.situacaoRO || "Status não informado") === filtroStatus);
       }
 
-      // filtro de motivo
       if (filtroMotivo !== "todos") {
         base = base.filter(r => (r.motivo || "Motivo não informado") === filtroMotivo);
       }
 
-      // filtro de cliente
       if (filtroCliente !== "todos") {
         base = base.filter(r => (r.cliente || "") === filtroCliente);
       }
 
-      // filtro de faixa de tempo
       if (filtroFaixaTempo !== "todos") {
         base = base.filter(r => r.faixaTempo === filtroFaixaTempo);
       }
@@ -765,7 +738,6 @@
       atualizarDashboard();
     }
 
-    /* Atualiza cards, tabela e gráficos */
     function atualizarDashboard() {
       const base = dadosFiltrados;
 
@@ -800,7 +772,6 @@
       montarBotoesStatus();
     }
 
-    /* Tabela */
     function preencherTabela(base) {
       const tbody = document.querySelector("#tabelaRO tbody");
       tbody.innerHTML = "";
@@ -824,6 +795,7 @@
           </td>
           <td>${r.qtdFP}</td>
           <td>${r.ultFP}</td>
+          <td>${r.comentQualidade || ""}</td>
           <td>${r.ton.toFixed(2)}</td>
           <td>${r.m2.toFixed(2)}</td>
         `;
@@ -831,7 +803,6 @@
       });
     }
 
-    /* Gráficos Motivo + Status */
     function desenharGraficosMotivoStatus(base) {
       const countMotivo = {};
       base.forEach(r => {
@@ -913,9 +884,7 @@
       });
     }
 
-    /* NOVOS GRÁFICOS: CLIENTES + TEMPO */
     function desenharGraficosClientesTempo(base) {
-      // clientes com ROs abertas
       const countClientesAbertos = {};
       base.forEach(r => {
         if (!r.aberto) return;
@@ -959,7 +928,6 @@
         }
       });
 
-      // tempo entre abertura e último FP (faixas)
       const countFaixas = {};
       base.forEach(r => {
         if (!r.faixaTempo) return;
@@ -1004,7 +972,6 @@
       });
     }
 
-    /* Botões de status dinâmicos */
     function montarBotoesStatus() {
       const container = document.getElementById("statusBtns");
       container.innerHTML = "";
@@ -1018,9 +985,7 @@
           filtroStatus = s;
           aplicarFiltrosCombinados();
         };
-        if (filtroStatus === s) {
-          btn.classList.add("active");
-        }
+        if (filtroStatus === s) btn.classList.add("active");
         container.appendChild(btn);
       });
     }
@@ -1030,7 +995,6 @@
       aplicarFiltrosCombinados();
     }
 
-    // TEMA CLARO / ESCURO
     const themeToggle = document.getElementById("themeToggle");
 
     function aplicaTemaInicial() {
