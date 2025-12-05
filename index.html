@@ -560,7 +560,7 @@
       </div>
     </div>
 
-    <!-- NOVOS GRÁFICOS: CLIENTES + TEMPO FP -->
+    <!-- CLIENTES + TEMPO -->
     <div class="panel">
       <div class="panel-header">
         <div>
@@ -907,13 +907,17 @@
     function desenharGraficosClientesTempo(base) {
       const countClientesAbertos = {};
       base.forEach(r => {
-        if (!r.aberto) return;
+        if (!r.aberto) return; // só ROs em aberto
         const key = r.cliente || "Cliente não informado";
         countClientesAbertos[key] = (countClientesAbertos[key] || 0) + 1;
       });
 
-      const clientes = Object.keys(countClientesAbertos);
-      const qtdPorCliente = Object.values(countClientesAbertos);
+      // ordenar do maior para o menor
+      const paresOrdenados = Object.entries(countClientesAbertos)
+        .sort((a, b) => b[1] - a[1]); // [ [cliente, qtde], ... ]
+
+      const clientes = paresOrdenados.map(p => p[0]);
+      const qtdPorCliente = paresOrdenados.map(p => p[1]);
 
       if (clientesChart) clientesChart.destroy();
       clientesChart = new Chart(document.getElementById("clientesAbertosChart"), {
