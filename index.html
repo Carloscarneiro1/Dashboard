@@ -425,26 +425,10 @@
       background: rgba(239, 68, 68, 0.08);
     }
 
-    .metric-badge {
-      font-size: 10px;
-      color: var(--text-muted);
-    }
-
-    .mode-label {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .subtitle {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin: 0 0 4px;
-    }
-
-    .subtitle b {
-      color: var(--accent);
-      font-weight: 600;
-    }
+    .metric-badge { font-size: 10px; color: var(--text-muted); }
+    .mode-label { font-size: 11px; color: var(--text-muted); }
+    .subtitle { font-size: 11px; color: var(--text-muted); margin: 0 0 4px; }
+    .subtitle b { color: var(--accent); font-weight: 600; }
   </style>
 </head>
 
@@ -481,9 +465,7 @@
             <span class="card-label">Total de ROs</span>
             <div class="card-icon">📊</div>
           </div>
-          <div class="card-value">
-            <span id="totalROs">0</span>
-          </div>
+          <div class="card-value"><span id="totalROs">0</span></div>
           <div class="card-sub">
             <span>Quantidade de registros na base filtrada</span>
             <span class="pill-soft">Base consolidada</span>
@@ -571,9 +553,7 @@
         <div>
           <div class="panel-tag">Análises complementares</div>
           <h3>Clientes e tempo de atendimento</h3>
-          <p>
-            Quem concentra mais ROs em aberto e como está o tempo entre a abertura e o último follow-up.
-          </p>
+          <p>Quem concentra mais ROs em aberto e como está o tempo entre a abertura e o último follow-up.</p>
         </div>
       </div>
 
@@ -606,6 +586,7 @@
           <p>Visão linha a linha das ROs, respeitando todos os filtros aplicados acima.</p>
         </div>
       </div>
+
       <div class="table-wrapper">
         <div class="table-scroll">
           <table id="tabelaRO">
@@ -844,11 +825,7 @@
       });
 
       const listaMotivos = Object.entries(mapaMotivo)
-        .map(([motivo, v]) => ({
-          motivo,
-          qtd: v.qtd,
-          ton: v.ton
-        }))
+        .map(([motivo, v]) => ({ motivo, qtd: v.qtd, ton: v.ton }))
         .sort((a, b) => b.ton - a.ton);
 
       const motivos = listaMotivos.map(x => x.motivo);
@@ -862,7 +839,14 @@
           datasets: [{
             label: "Toneladas reclamadas",
             data: tonsPorMotivo,
-            backgroundColor: "#38bdf8"
+            backgroundColor: "#38bdf8",
+
+            /* NOVO: barras pequenas não somem */
+            minBarLength: 8,
+
+            /* opcional: mais contraste */
+            borderWidth: 1,
+            borderColor: "#38bdf8"
           }]
         },
         options: {
@@ -870,9 +854,7 @@
           scales: {
             y: {
               beginAtZero: true,
-              ticks: {
-                callback: (value) => `${value} t`
-              }
+              ticks: { callback: (value) => `${value} t` }
             },
             x: { ticks: { maxRotation: 45, minRotation: 0 } }
           },
@@ -911,6 +893,7 @@
         const key = r.situacaoRO || "Status não informado";
         countStatus[key] = (countStatus[key] || 0) + 1;
       });
+
       const status = Object.keys(countStatus);
       const qtdStatus = Object.values(countStatus);
 
@@ -934,11 +917,7 @@
             const idx = elements[0].index;
             const statusClicado = status[idx];
 
-            if (filtroStatus === statusClicado) {
-              filtroStatus = "todas";
-            } else {
-              filtroStatus = statusClicado;
-            }
+            filtroStatus = (filtroStatus === statusClicado) ? "todas" : statusClicado;
             aplicarFiltrosCombinados();
           }
         }
@@ -953,8 +932,7 @@
         countClientesAbertos[key] = (countClientesAbertos[key] || 0) + 1;
       });
 
-      const paresOrdenados = Object.entries(countClientesAbertos)
-        .sort((a, b) => b[1] - a[1]);
+      const paresOrdenados = Object.entries(countClientesAbertos).sort((a, b) => b[1] - a[1]);
 
       const clientes = paresOrdenados.map(p => p[0]);
       const qtdPorCliente = paresOrdenados.map(p => p[1]);
@@ -982,11 +960,7 @@
             const idx = elements[0].index;
             const clienteClicado = clientes[idx];
 
-            if (filtroCliente === clienteClicado) {
-              filtroCliente = "todos";
-            } else {
-              filtroCliente = clienteClicado;
-            }
+            filtroCliente = (filtroCliente === clienteClicado) ? "todos" : clienteClicado;
             aplicarFiltrosCombinados();
           }
         }
@@ -1016,20 +990,14 @@
         },
         options: {
           responsive: true,
-          scales: {
-            y: { beginAtZero: true, ticks: { stepSize: 1 } }
-          },
+          scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } },
           plugins: { legend: { display: false } },
           onClick: (evt, elements) => {
             if (!elements.length) return;
             const idx = elements[0].index;
             const faixaClicada = faixas[idx];
 
-            if (filtroFaixaTempo === faixaClicada) {
-              filtroFaixaTempo = "todos";
-            } else {
-              filtroFaixaTempo = faixaClicada;
-            }
+            filtroFaixaTempo = (filtroFaixaTempo === faixaClicada) ? "todos" : faixaClicada;
             aplicarFiltrosCombinados();
           }
         }
@@ -1049,9 +1017,7 @@
           filtroStatus = s;
           aplicarFiltrosCombinados();
         };
-        if (filtroStatus === s) {
-          btn.classList.add("active");
-        }
+        if (filtroStatus === s) btn.classList.add("active");
         container.appendChild(btn);
       });
     }
