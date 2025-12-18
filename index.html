@@ -372,7 +372,6 @@
 
     body.light .table-wrapper { background: #ffffff; }
 
-    /* NOVO: rolagem horizontal dentro da área da tabela */
     .table-scroll {
       overflow-x: auto;
     }
@@ -381,7 +380,7 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 11.5px;
-      min-width: 900px; /* garante scroll no celular se faltar espaço */
+      min-width: 900px;
     }
 
     thead {
@@ -710,7 +709,7 @@
         const motivo            = val(6) || "Motivo não informado";
         const ton               = num(7);
         const m2                = num(8);
-        const comentQualidade   = val(9);    // coluna comentários
+        const comentQualidade   = val(9);
         const situacaoRO        = val(10) || "Status não informado";
         const qtdFP             = val(11);
         const ultFP             = val(12);
@@ -832,18 +831,28 @@
     }
 
     function desenharGraficosMotivoStatus(base) {
-      /* ---- MOTIVO EM ORDEM DECRESCENTE ---- */
-      const countMotivo = {};
+      /* ---- MOTIVO: BARRA = TONELADAS | TOOLTIP = QTD ROs + TONELADAS | ORDEM = TON (DESC) ---- */
+      const mapaMotivo = {};
+
       base.forEach(r => {
-        const key = r.motivo || "Motivo não informado";
-        countMotivo[key] = (countMotivo[key] || 0) + 1;
+        const motivo = r.motivo || "Motivo não informado";
+        if (!mapaMotivo[motivo]) {
+          mapaMotivo[motivo] = { qtd: 0, ton: 0 };
+        }
+        mapaMotivo[motivo].qtd += 1;
+        mapaMotivo[motivo].ton += (r.ton || 0);
       });
 
-      const paresMotivo = Object.entries(countMotivo)
-        .sort((a, b) => b[1] - a[1]); // ordena do maior para o menor
+      const listaMotivos = Object.entries(mapaMotivo)
+        .map(([motivo, v]) => ({
+          motivo,
+          qtd: v.qtd,
+          ton: v.ton
+        }))
+        .sort((a, b) => b.ton - a.ton);
 
-      const motivos = paresMotivo.map(p => p[0]);
-      const qtdMotivo = paresMotivo.map(p => p[1]);
+      const motivos = listaMotivos.map(x => x.motivo);
+      const tonsPorMotivo = listaMotivos.map(x => Number((x.ton || 0).toFixed(2)));
 
       if (motivoChart) motivoChart.destroy();
       motivoChart = new Chart(document.getElementById("motivoChart"), {
@@ -851,28 +860,46 @@
         data: {
           labels: motivos,
           datasets: [{
-            label: "Qtd de ROs",
-            data: qtdMotivo,
+            label: "Toneladas reclamadas",
+            data: tonsPorMotivo,
             backgroundColor: "#38bdf8"
           }]
         },
         options: {
           responsive: true,
           scales: {
-            y: { beginAtZero: true, ticks: { stepSize: 1 } },
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: (value) => `${value} t`
+              }
+            },
             x: { ticks: { maxRotation: 45, minRotation: 0 } }
           },
-          plugins: { legend: { display: false } },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                title: (items) => items?.[0]?.label || "",
+                label: (item) => {
+                  const i = item.dataIndex;
+                  const qtd = listaMotivos[i]?.qtd ?? 0;
+                  return `Qtd de ROs: ${qtd}`;
+                },
+                afterLabel: (item) => {
+                  const i = item.dataIndex;
+                  const ton = listaMotivos[i]?.ton ?? 0;
+                  return `Tonelagem reclamada: ${ton.toFixed(2)} t`;
+                }
+              }
+            }
+          },
           onClick: (evt, elements) => {
             if (!elements.length) return;
             const idx = elements[0].index;
             const motivoClicado = motivos[idx];
 
-            if (filtroMotivo === motivoClicado) {
-              filtroMotivo = "todos";
-            } else {
-              filtroMotivo = motivoClicado;
-            }
+            filtroMotivo = (filtroMotivo === motivoClicado) ? "todos" : motivoClicado;
             aplicarFiltrosCombinados();
           }
         }
