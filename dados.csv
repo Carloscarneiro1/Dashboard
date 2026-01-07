@@ -1,6 +1,6 @@
 ﻿Cliente;Número RO;Data Abertura RO;Ult Sts;Informação Solicitada ao Cliente;Dias Último Status;Motivo;Reclamado Ton;Reclamado M2;Comentários da Qualidade;Situação atual do RO;Qtd FP realizado;Último FP realizado;Comentários do Pós vendas;Link
 ALUGLASS;00009-2026;06/01/2026;2;06/01/2026;1;CHAPAS TRINCADAS;2,329688;115,56;Aguardando informações do cliente;Aguardando Cliente;1;06/01/2026;-;Sistema RO
-Clientes Export.;00014-2026;06/01/2026;2;07/01/2026;1;CHAPAS QUEBRADAS              ;1,650297;81,86;Aguardando amostras/ Jacqueline em contato com cliente;Aguardando Cliente;1;06/01/2026;-;Sistema RO
+LIRQUEN CH;00014-2026;06/01/2026;2;07/01/2026;1;CHAPAS QUEBRADAS              ;1,650297;81,86;Aguardando amostras/ Jacqueline em contato com cliente;Aguardando Cliente;1;06/01/2026;-;Sistema RO
 NEW BOX;00013-2026;06/01/2026;2;06/01/2026;1;DIFERENÇA DE TONALIDADE;0,064512;2,56;Aguardando amostras/ Jacqueline em contato com cliente;Aguardando Cliente;1;06/01/2026;-;Sistema RO
 VIPEL;00015-2026;07/01/2026;2;07/01/2026;0;MANCHAS                       ;2,052892;81,464;Aguardando amostras;Aguardando Cliente;1;07/01/2026;-;Sistema RO
 VIPEL;00016-2026;07/01/2026;2;07/01/2026;0;MANCHAS                       ;1,941408;77,04;Aguardando amostras;Aguardando Cliente;1;07/01/2026;-;Sistema RO
@@ -12,7 +12,6 @@ BANDEIRANTES;04680-2025;24/12/2025;2;29/12/2025;14;BOLHAS                       
 BANDEIRANTES;04681-2025;24/12/2025;2;29/12/2025;14;BOLHAS                        ;0,159667;7,92;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
 BANDEIRANTES;04682-2025;24/12/2025;2;29/12/2025;14;BOLHAS                        ;0,284739;14,124;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
 BANDEIRANTES;04683-2025;24/12/2025;2;29/12/2025;14;BOLHAS                        ;0,388281;15,408;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
-CRISTAL SETE;03585-2025;06/10/2025;2;07/10/2025;93;MANCHAS                       ;0,075933;4,58;Aguardando amostras;Aguardando Cliente;4;22/12/2025;-;Sistema RO
 CRISTAL SETE;03990-2025;03/11/2025;2;04/11/2025;65;FALHA DE METALIZAÇÃO;0,075263;4,51;Aguardando amostras;Aguardando Cliente;4;22/12/2025;-;Sistema RO
 CRISTAL SETE;04225-2025;19/11/2025;2;24/11/2025;49;FALHA DE METALIZAÇÃO;0,01591;1,07;Aguardando amostras;Aguardando Cliente;3;22/12/2025;-;Sistema RO
 CRISTAL SETE;04228-2025;19/11/2025;2;24/11/2025;49;BOLHAS                        ;0,017844;1,2;Aguardando amostras;Aguardando Cliente;3;22/12/2025;-;Sistema RO
@@ -56,12 +55,12 @@ CRISTAL SETE;04581-2025;15/12/2025;2;15/12/2025;23;BOLHAS                       
 CRISTAL SETE;04616-2025;16/12/2025;2;17/12/2025;22;BOLHAS                        ;0,159313;7,21;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
 CRISTAL SETE;04628-2025;17/12/2025;2;17/12/2025;21;BOLHAS                        ;0,062244;2,47;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
 JACINTO;04116-2025;11/11/2025;2;13/11/2025;57;PEDIDO ERRADO                 ;2,174377;107,856;Devolvido para inserir  evidência da perda do cliente referente aos 46m² (Aguardando retorno do Cliente);Aguardando Qualidade;1;23/12/2025;-;Sistema RO
-Clientes Export.;04279-2025;26/11/2025;2;27/11/2025;42;DEFORMAÇÃO                    ;8,1776;847,42;Aguardando amostras/ Jacqueline em contato com cliente ;Aguardando Cliente;1;27/11/2025;-;Sistema RO
+VASA VIDRIERIA ARGENTINA;04279-2025;26/11/2025;2;27/11/2025;42;DEFORMAÇÃO                    ;8,1776;847,42;Aguardando amostras/ Jacqueline em contato com cliente ;Aguardando Cliente;1;27/11/2025;-;Sistema RO
 VIDROFORTE;04479-2025;08/12/2025;2;11/12/2025;30;EMPENAMENTO                   ;0,114499;7,7;Aguardando amostras;Aguardando Cliente;2;15/12/2025;-;Sistema RO
-VIDROFORTE;04495-2025;09/12/2025;2;10/12/2025;29;DEFEITOS DE ESTANHO           ;0,094094;7,7;Aguardando amostras;Aguardando Cliente;2;15/12/2025;;
+VIDROFORTE;04495-2025;09/12/2025;2;10/12/2025;29;DEFEITOS DE ESTANHO           ;0,094094;7,7;Aguardando amostras;Aguardando Cliente;2;15/12/2025;-;Sistema RO
 VIDROFORTE;04573-2025;15/12/2025;2;15/12/2025;23;MANCHAS                       ;0,05467;7,7;Aguardando amostras;Aguardando Cliente;1;15/12/2025;;
 TECVIDROS;04549-2025;12/12/2025;2;15/12/2025;26;RISCO                         ;0,310464;15,4;Aguardando amostras;Aguardando Cliente;1;15/12/2025;;
-Clientes Export.;04163-2025;14/11/2025;2;17/11/2025;54;DEFORMAÇÃO                    ;1,331121;137,94;Aguardando amostras/ Jacqueline em contato com cliente (Corrugado);Aguardando Cliente;1;17/11/2025;;
-Clientes Export.;04278-2025;26/11/2025;2;27/11/2025;42;INCLUSÃO;5,464602;566,28;Aguardando amostras/ Jacqueline em contato com cliente (Debri);Aguardando Cliente;1;17/11/2025;;
+VIDRIO ANDINO COLOMBIA S.A.S.;04163-2025;14/11/2025;2;17/11/2025;54;DEFORMAÇÃO                    ;1,331121;137,94;Aguardando amostras/ Jacqueline em contato com cliente (Corrugado);Aguardando Cliente;1;17/11/2025;;
+VIDRIO ANDINO COLOMBIA S.A.S.;04278-2025;26/11/2025;2;27/11/2025;42;INCLUSÃO;5,464602;566,28;Aguardando amostras/ Jacqueline em contato com cliente (Debri);Aguardando Cliente;1;17/11/2025;;
 VIPEL;04345-2025;01/12/2025;2;02/12/2025;37;CACO ADERENTE;0,064764;2,57;Aguardando amostras;Aguardando Cliente;2;15/12/2025;;
 VITRIUM;04040-2025;05/11/2025;2;06/11/2025;63;MANCHAS                       ;0,343675;23,112;Aguardando amostras;Aguardando Cliente;3;22/12/2025;;
