@@ -1,69 +1,70 @@
 ﻿Cliente;Número RO;Data Abertura RO;Ult Sts;Informação Solicitada ao Cliente;Dias Último Status;Motivo;Reclamado Ton;Reclamado M2;Comentários da Qualidade;Situação atual do RO;Qtd FP realizado;Último FP realizado;Comentários do Pós vendas;Link
-ALUGLASS;00009-2026;06/01/2026;2;06/01/2026;2;CHAPAS TRINCADAS;2,329688;115,56;Aguardando informações do cliente;Aguardando Cliente;1;06/01/2026;-;Sistema RO
-NELSON PEREIRA;00034-2026;08/01/2026;2;08/01/2026;0;QUANTIDADE DE CHAPAS          ;0,078676;8,153;Aguardando Check-list  DT1100144332;Aguardando Expedição;1;08/01/2026;-;Sistema RO
-NEW BOX;00013-2026;06/01/2026;2;06/01/2026;2;DIFERENÇA DE TONALIDADE;0,064512;2,56;Aguardando amostras/ Jacqueline em contato com cliente;Aguardando Cliente;1;06/01/2026;-;Sistema RO
-SERGLASS;00030-2026;08/01/2026;2;08/01/2026;0;BOLHAS                        ;0,008467;0,42;Aguardando amostras;Aguardando Cliente;1;08/01/2026;-;Sistema RO
-SERGLASS;00031-2026;08/01/2026;2;08/01/2026;0;BOLHAS                        ;0,126372;20,32;Aguardando amostras;Aguardando Cliente;1;08/01/2026;-;Sistema RO
-SERGLASS;00032-2026;08/01/2026;2;08/01/2026;0;BOLHAS                        ;0,479144;39,21;Aguardando amostras;Aguardando Cliente;1;08/01/2026;-;Sistema RO
-VIPEL;00015-2026;07/01/2026;2;07/01/2026;1;MANCHAS                       ;2,052892;81,464;Aguardando amostras;Aguardando Cliente;1;07/01/2026;-;Sistema RO
-VIPEL;00016-2026;07/01/2026;2;07/01/2026;1;MANCHAS                       ;1,941408;77,04;Aguardando amostras;Aguardando Cliente;1;07/01/2026;-;Sistema RO
-CASAS BANDEIRANTES LTDA;04672-2025;23/12/2025;2;23/12/2025;16;FALHA DE METALIZAÇÃO;0,538477;35,31;Aguardando amostras;Aguardando Cliente;1;23/12/2025;-;Sistema RO
-CASAS BANDEIRANTES LTDA;04677-2025;24/12/2025;2;29/12/2025;15;BOLHAS                        ;0,054698;7,704;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
-CASAS BANDEIRANTES LTDA;04678-2025;24/12/2025;2;29/12/2025;15;BOLHAS                        ;0,074343;7,704;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
-CASAS BANDEIRANTES LTDA;04679-2025;24/12/2025;2;29/12/2025;15;BOLHAS                        ;0,105011;7,062;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
-CASAS BANDEIRANTES LTDA;04680-2025;24/12/2025;2;29/12/2025;15;BOLHAS                        ;0,569479;28,248;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
-CASAS BANDEIRANTES LTDA;04681-2025;24/12/2025;2;29/12/2025;15;BOLHAS                        ;0,159667;7,92;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
-CASAS BANDEIRANTES LTDA;04682-2025;24/12/2025;2;29/12/2025;15;BOLHAS                        ;0,284739;14,124;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
-CASAS BANDEIRANTES LTDA;04683-2025;24/12/2025;2;29/12/2025;15;BOLHAS                        ;0,388281;15,408;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
-CRISTAL SETE VIDROS TEMPERADOS LTDA;03990-2025;03/11/2025;2;04/11/2025;66;FALHA DE METALIZAÇÃO;0,075263;4,51;Aguardando amostras;Aguardando Cliente;4;22/12/2025;-;Sistema RO
-CRISTAL SETE VIDROS TEMPERADOS LTDA;04225-2025;19/11/2025;2;24/11/2025;50;FALHA DE METALIZAÇÃO;0,01591;1,07;Aguardando amostras;Aguardando Cliente;3;22/12/2025;-;Sistema RO
-CRISTAL SETE VIDROS TEMPERADOS LTDA;04228-2025;19/11/2025;2;24/11/2025;50;BOLHAS                        ;0,017844;1,2;Aguardando amostras;Aguardando Cliente;3;22/12/2025;-;Sistema RO
-CRISTAL SETE VIDROS TEMPERADOS LTDA;04359-2025;01/12/2025;2;02/12/2025;38;FALHA DE METALIZAÇÃO;0,011491;0,57;Aguardando amostras;Aguardando Cliente;3;22/12/2025;-;Sistema RO
-CRISTAL SETE VIDROS TEMPERADOS LTDA;04448-2025;05/12/2025;2;10/12/2025;34;EMPENAMENTO                   ;0,189302;9,39;Aguardando informações do cliente;Aguardando Cliente;4;22/12/2025;-;Sistema RO
-CRISTAL SETE VIDROS TEMPERADOS LTDA;04601-2025;16/12/2025;2;16/12/2025;23;BOLHAS                        ;0,025401;1,26;Aguardando fotos com escala ou amostras;Aguardando Cliente;2;22/12/2025;-;Sistema RO
-SN VIDROS COM. A. DE VIDROS LTDA;04562-2025;12/12/2025;2;15/12/2025;27;MANCHAS                       ;1,475698;99,24;Visita agendada em 14/01/2026;Aguardando Qualidade;2;15/12/2025;-;Sistema RO
-GLASSEC VIDROS DE SEGURANCA LTDA;04399-2025;02/12/2025;2;04/12/2025;37;SERRILHADO                    ;0,078676;8,153;Aguardando amostras;Aguardando Cliente;3;23/12/2025;-;Sistema RO
-GLASSEC VIDROS DE SEGURANCA LTDA;04400-2025;02/12/2025;2;04/12/2025;37;SERRILHADO                    ;0,078676;8,153;Aguardando amostras;Aguardando Cliente;3;23/12/2025;-;Sistema RO
-VIDRACARIA GUAPORE LTDA;04166-2025;14/11/2025;2;17/11/2025;55;MANCHA DE ÁGUA                ;0,427109;21,186;Aguardando processamento cliente;Aguardando Cliente;3;23/12/2025;-;Sistema RO
-GUAPORE IND E COM DE VIDROS LTDA;04438-2025;04/12/2025;2;05/12/2025;35;BOLHAS                        ;0,310624;15,408;Aguardando informações do cliente;Aguardando Cliente;3;23/12/2025;-;Sistema RO
-IMPERIAL VIDROS E ACESSORIOS EIRELI;04641-2025;18/12/2025;2;18/12/2025;21;DEFORMAÇÃO                    ;6,678441;331,272;Em análise ( Aguardando definição da Gerência);Aguardando Qualidade;1;19/12/2025;-;Sistema RO
-INDUSTRIA BAIANA DE VIDROS LTDA;04337-2025;01/12/2025;2;01/12/2025;38;RISCO                         ;3,882816;154,08;Aguardando amostras;Aguardando Cliente;2;17/12/2025;-;Sistema RO
-INDUSTRIA BAIANA DE VIDROS LTDA;04339-2025;01/12/2025;2;02/12/2025;38;DEFORMAÇÃO                    ;4,659378;231,12;Aguardando amostras;Aguardando Cliente;1;02/12/2025;-;Sistema RO
-INDUSTRIA BAIANA DE VIDROS LTDA;04649-2025;18/12/2025;2;19/12/2025;21;MANCHAS                       ;5,590972;277,33;Aguardando amostras;Aguardando Cliente;1;19/12/2025;-;Sistema RO
-VIDRACARIA LAJEADENSE LTDA.;04369-2025;02/12/2025;2;04/12/2025;37;BOLHAS                        ;0,069148;3,43;Aguardando informações do cliente;Aguardando Cliente;1;27/10/2025;-;Sistema RO
-VIDRACARIA LAJEADENSE LTDA.;04558-2025;12/12/2025;2;16/12/2025;27;FALHA DE METALIZAÇÃO;0,176979;7,023;Aguardando amostras;Aguardando Cliente;2;18/12/2025;-;Sistema RO
-VIDRACARIA LAJEADENSE LTDA.;04638-2025;18/12/2025;2;19/12/2025;21;BOLHAS                        ;0,388281;19,26;Aguardando amostras;Aguardando Cliente;1;19/12/2025;-;Sistema RO
-MARVITE MARANHAO VIDROS TEMP LTDA;03985-2025;31/10/2025;2;03/11/2025;69;FALHA DE METALIZAÇÃO;2,019064;100,152;Aguardando amostras/ Previsão de entrega 12/01/2026;Aguardando Cliente;4;22/12/2025;-;Sistema RO
-MARY ART SAO PAULO IND E COM LTDA;03841-2025;23/10/2025;2;24/10/2025;77;BOLHAS                        ;0,0361;1,7907;Aguardando fotos com escala ou amostras;Aguardando Cliente;4;22/12/2025;-;Sistema RO
-MODELO VIDROS IND E COMERCIO LTDA;04584-2025;15/12/2025;2;16/12/2025;24;FALHA DE METALIZAÇÃO;0,020265;2,1;Aguardando amostras;Aguardando Cliente;1;16/12/2025;-;Sistema RO
-MODELO VIDROS IND E COMERCIO LTDA;04585-2025;15/12/2025;2;16/12/2025;24;BOLHAS                        ;0,076608;3,8;Aguardando amostras;Aguardando Cliente;1;16/12/2025;-;Sistema RO
-PKO DO BRASIL IMPORT E EXPORT LTDA;04143-2025;12/11/2025;2;13/11/2025;57;DEFORMAÇÃO                    ;0,013377;1,3863;Aguardando amostras;Aguardando Cliente;2;12/12/2025;-;Sistema RO
-PILKINGTON BRASIL LTDA;04662-2025;22/12/2025;2;23/12/2025;17;CHAPAS QUEBRADAS              ;0,300456;38,52;Em análise quebra de defeito marcado - verificar com a Mayara;Aguardando Qualidade;1;23/12/2025;-;Sistema RO
-PORTICO ESQUADRIAS LTDA;04587-2025;15/12/2025;2;16/12/2025;24;DIFERENÇA DE TONALIDADE;13,512195;670,248;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
-PORTICO ESQUADRIAS LTDA;04588-2025;15/12/2025;2;16/12/2025;24;DIFERENÇA DE TONALIDADE;10,87188;539,28;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
-PORTICO ESQUADRIAS LTDA;04589-2025;15/12/2025;2;16/12/2025;24;DIFERENÇA DE TONALIDADE;13,356882;662,544;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
-PORTICO ESQUADRIAS LTDA;04590-2025;15/12/2025;2;16/12/2025;24;DIFERENÇA DE TONALIDADE;13,046236;647,135;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
-ROHDEN VIDROS LTDA;04494-2025;09/12/2025;2;11/12/2025;30;MANCHAS                       ;0,192426;24,67;Aguardando amostras/ Jacqueline em contato com cliente;Aguardando Cliente;1;11/12/2025;-;Sistema RO
-ROHDEN VIDROS LTDA;04621-2025;17/12/2025;2;18/12/2025;22;MANCHAS                       ;0,064116;8,22;Aguardando amostras;Aguardando Cliente;1;19/12/2025;-;Sistema RO
-ROHDEN VIDROS LTDA;04622-2025;17/12/2025;2;18/12/2025;22;MANCHAS                       ;0,054329;5,63;Aguardando amostras;Aguardando Cliente;1;19/12/2025;-;Sistema RO
-S E R GLASS VID BLINDADOS LTDA ME;04608-2025;16/12/2025;2;17/12/2025;23;BOLHAS                        ;1,6525;110,23;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
-S E R GLASS VID BLINDADOS LTDA ME;04609-2025;16/12/2025;2;17/12/2025;23;BOLHAS                        ;0,277026;39,31;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
-S E R GLASS VID BLINDADOS LTDA ME;04610-2025;16/12/2025;2;17/12/2025;23;BOLHAS                        ;0,977267;82,32;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
-SG IND E COM DE VIDROS LTDA;04472-2025;08/12/2025;2;11/12/2025;31;DIFICULDADE DE CORTE;1,24246;61,63;Possivel visita ao cliente - verificar com a Mayara, se possivel levar Juliano;Aguardando Qualidade;2;11/12/2025;-;Sistema RO
-TEMPERBRAS IND E COM DE VID LTDA;04469-2025;06/12/2025;2;09/12/2025;33;BOLHAS                        ;0,127755;6,33715;Aguardando informações do cliente;Aguardando Cliente;2;09/12/2025;-;Sistema RO
-TEMPERBRAS IND E COM DE VID LTDA;04567-2025;13/12/2025;2;15/12/2025;26;BOLHAS                        ;0,517943;25,86855;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;15/12/2025;-;Sistema RO
-TEMPERBRAS IND E COM DE VID LTDA;04576-2025;15/12/2025;2;15/12/2025;24;BOLHAS                        ;0,052617;2,61;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;15/12/2025;-;Sistema RO
-TEMPERBRAS IND E COM DE VID LTDA;04577-2025;15/12/2025;2;15/12/2025;24;BOLHAS                        ;0,218048;9,461;Aguardando amostras;Aguardando Cliente;1;15/12/2025;-;Sistema RO
-TEMPERBRAS IND E COM DE VID LTDA;04581-2025;15/12/2025;2;15/12/2025;24;BOLHAS                        ;0,20664;9,54;Aguardando amostras;Aguardando Cliente;1;15/12/2025;-;Sistema RO
-TEMPERBRAS IND E COM DE VID LTDA;04616-2025;16/12/2025;2;17/12/2025;23;BOLHAS                        ;0,159313;7,21;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
-TEMPERBRAS IND E COM DE VID LTDA;04628-2025;17/12/2025;2;17/12/2025;22;BOLHAS                        ;0,062244;2,47;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
-TEMPERLANDIA TEMP VIDROLANDIA LTDA;04116-2025;11/11/2025;2;13/11/2025;58;PEDIDO ERRADO                 ;2,174377;107,856;Devolvido para inserir  evidência da perda do cliente referente aos 46m² (Aguardando retorno do Cliente);Aguardando Qualidade;1;23/12/2025;-;Sistema RO
-VASA - VIDRIERIA ARGENTINA S.A;04279-2025;26/11/2025;2;27/11/2025;43;DEFORMAÇÃO                    ;8,1776;847,42;Aguardando amostras/ Jacqueline em contato com cliente ;Aguardando Cliente;1;27/11/2025;;
-VIDROFORTE IND E COM DE VIDROS LTDA;04479-2025;08/12/2025;2;11/12/2025;31;EMPENAMENTO                   ;0,114499;7,7;Aguardando amostras;Aguardando Cliente;2;15/12/2025;;
-VIDROFORTE IND E COM DE VIDROS LTDA;04495-2025;09/12/2025;2;10/12/2025;30;DEFEITOS DE ESTANHO           ;0,094094;7,7;Aguardando amostras;Aguardando Cliente;2;15/12/2025;;
-VIDROFORTE IND E COM DE VIDROS LTDA;04573-2025;15/12/2025;2;15/12/2025;24;MANCHAS                       ;0,05467;7,7;Aguardando amostras;Aguardando Cliente;1;15/12/2025;;
-VDX VID EXP IND VID MAQ LIMITADA;04549-2025;12/12/2025;2;15/12/2025;27;RISCO                         ;0,310464;15,4;Aguardando amostras;Aguardando Cliente;1;15/12/2025;;
-VIDRIO ANDINO COLOMBIA S.A.S.;04163-2025;14/11/2025;2;17/11/2025;55;DEFORMAÇÃO                    ;1,331121;137,94;Aguardando amostras/ Jacqueline em contato com cliente (Corrugado);Aguardando Cliente;1;17/11/2025;;
-VIDRIO ANDINO COLOMBIA S.A.S.;04278-2025;26/11/2025;2;27/11/2025;43;INCLUSÃO;5,464602;566,28;Aguardando amostras/ Jacqueline em contato com cliente (Debri);Aguardando Cliente;1;17/11/2025;;
-VIPEL INDUSTRIA E COMERCIO LTDA;04345-2025;01/12/2025;2;02/12/2025;38;CACO ADERENTE;0,064764;2,57;Aguardando amostras;Aguardando Cliente;2;15/12/2025;;
-VITRIUM IND E COM DE VIDROS LTDA;04040-2025;05/11/2025;2;06/11/2025;64;MANCHAS                       ;0,343675;23,112;Aguardando amostras;Aguardando Cliente;3;22/12/2025;;
+ALUGLASS;00009-2026;06/01/2026;2;06/01/2026;3;CHAPAS TRINCADAS;2,329688;115,56;Aguardando informações do cliente;Aguardando Cliente;1;06/01/2026;-;Sistema RO
+JACINTO;00039-2026;08/01/2026;2;09/01/2026;1;QUANTIDADE DE CHAPAS          ;0,037357;7,062;Análisando Checklist - Fechar RO;Aguardando Qualidade;1;08/01/2026;-;Sistema RO
+NEW BOX;00013-2026;06/01/2026;2;06/01/2026;3;DIFERENÇA DE TONALIDADE;0,064512;2,56;Aguardando amostras/ Jacqueline em contato com cliente;Aguardando Cliente;1;06/01/2026;-;Sistema RO
+PILKINGTON BRASIL LTDA;00038-2026;08/01/2026;2;08/01/2026;1;RISCO LOCALIZADO              ;1,044765;147,15;Fechar RO - montando apresentação;Aguardando Qualidade;1;08/01/2026;-;Sistema RO
+SERGLASS;00030-2026;08/01/2026;2;08/01/2026;1;BOLHAS                        ;0,008467;0,42;Aguardando amostras;Aguardando Cliente;1;08/01/2026;-;Sistema RO
+SERGLASS;00031-2026;08/01/2026;2;08/01/2026;1;BOLHAS                        ;0,126372;20,32;Aguardando amostras;Aguardando Cliente;1;08/01/2026;-;Sistema RO
+SERGLASS;00032-2026;08/01/2026;2;08/01/2026;1;BOLHAS                        ;0,479144;39,21;Aguardando amostras;Aguardando Cliente;1;08/01/2026;-;Sistema RO
+VIPEL;00015-2026;07/01/2026;2;07/01/2026;2;MANCHAS                       ;2,052892;81,464;Aguardando amostras;Aguardando Cliente;1;07/01/2026;-;Sistema RO
+VIPEL;00016-2026;07/01/2026;2;07/01/2026;2;MANCHAS                       ;1,941408;77,04;Aguardando amostras;Aguardando Cliente;1;07/01/2026;-;Sistema RO
+CASAS BANDEIRANTES LTDA;04672-2025;23/12/2025;2;23/12/2025;17;FALHA DE METALIZAÇÃO;0,538477;35,31;Aguardando amostras;Aguardando Cliente;1;23/12/2025;-;Sistema RO
+CASAS BANDEIRANTES LTDA;04677-2025;24/12/2025;2;29/12/2025;16;BOLHAS                        ;0,054698;7,704;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
+CASAS BANDEIRANTES LTDA;04678-2025;24/12/2025;2;29/12/2025;16;BOLHAS                        ;0,074343;7,704;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
+CASAS BANDEIRANTES LTDA;04679-2025;24/12/2025;2;29/12/2025;16;BOLHAS                        ;0,105011;7,062;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
+CASAS BANDEIRANTES LTDA;04680-2025;24/12/2025;2;29/12/2025;16;BOLHAS                        ;0,569479;28,248;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
+CASAS BANDEIRANTES LTDA;04681-2025;24/12/2025;2;29/12/2025;16;BOLHAS                        ;0,159667;7,92;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
+CASAS BANDEIRANTES LTDA;04682-2025;24/12/2025;2;29/12/2025;16;BOLHAS                        ;0,284739;14,124;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
+CASAS BANDEIRANTES LTDA;04683-2025;24/12/2025;2;29/12/2025;16;BOLHAS                        ;0,388281;15,408;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;29/12/2025;-;Sistema RO
+CRISTAL SETE VIDROS TEMPERADOS LTDA;03990-2025;03/11/2025;2;04/11/2025;67;FALHA DE METALIZAÇÃO;0,075263;4,51;Aguardando amostras;Aguardando Cliente;4;22/12/2025;-;Sistema RO
+CRISTAL SETE VIDROS TEMPERADOS LTDA;04225-2025;19/11/2025;2;24/11/2025;51;FALHA DE METALIZAÇÃO;0,01591;1,07;Aguardando amostras;Aguardando Cliente;3;22/12/2025;-;Sistema RO
+CRISTAL SETE VIDROS TEMPERADOS LTDA;04228-2025;19/11/2025;2;24/11/2025;51;BOLHAS                        ;0,017844;1,2;Aguardando amostras;Aguardando Cliente;3;22/12/2025;-;Sistema RO
+CRISTAL SETE VIDROS TEMPERADOS LTDA;04359-2025;01/12/2025;2;02/12/2025;39;FALHA DE METALIZAÇÃO;0,011491;0,57;Aguardando amostras;Aguardando Cliente;3;22/12/2025;-;Sistema RO
+CRISTAL SETE VIDROS TEMPERADOS LTDA;04448-2025;05/12/2025;2;10/12/2025;35;EMPENAMENTO                   ;0,189302;9,39;Aguardando informações do cliente;Aguardando Cliente;4;22/12/2025;-;Sistema RO
+CRISTAL SETE VIDROS TEMPERADOS LTDA;04601-2025;16/12/2025;2;16/12/2025;24;BOLHAS                        ;0,025401;1,26;Aguardando fotos com escala ou amostras;Aguardando Cliente;2;22/12/2025;-;Sistema RO
+SN VIDROS COM. A. DE VIDROS LTDA;04562-2025;12/12/2025;2;15/12/2025;28;MANCHAS                       ;1,475698;99,24;Visita agendada em 14/01/2026;Aguardando Qualidade;2;15/12/2025;-;Sistema RO
+GLASSEC VIDROS DE SEGURANCA LTDA;04399-2025;02/12/2025;2;04/12/2025;38;SERRILHADO                    ;0,078676;8,153;Aguardando amostras;Aguardando Cliente;3;23/12/2025;-;Sistema RO
+GLASSEC VIDROS DE SEGURANCA LTDA;04400-2025;02/12/2025;2;04/12/2025;38;SERRILHADO                    ;0,078676;8,153;Aguardando amostras;Aguardando Cliente;3;23/12/2025;-;Sistema RO
+VIDRACARIA GUAPORE LTDA;04166-2025;14/11/2025;2;17/11/2025;56;MANCHA DE ÁGUA                ;0,427109;21,186;Aguardando processamento cliente;Aguardando Cliente;3;23/12/2025;-;Sistema RO
+GUAPORE IND E COM DE VIDROS LTDA;04438-2025;04/12/2025;2;05/12/2025;36;BOLHAS                        ;0,310624;15,408;Aguardando informações do cliente;Aguardando Cliente;3;23/12/2025;-;Sistema RO
+IMPERIAL VIDROS E ACESSORIOS EIRELI;04641-2025;18/12/2025;2;18/12/2025;22;DEFORMAÇÃO                    ;6,678441;331,272;Em análise ( Aguardando definição da Gerência);Aguardando Qualidade;1;19/12/2025;-;Sistema RO
+INDUSTRIA BAIANA DE VIDROS LTDA;04337-2025;01/12/2025;2;01/12/2025;39;RISCO                         ;3,882816;154,08;Aguardando amostras;Aguardando Cliente;2;17/12/2025;-;Sistema RO
+INDUSTRIA BAIANA DE VIDROS LTDA;04339-2025;01/12/2025;2;02/12/2025;39;DEFORMAÇÃO                    ;4,659378;231,12;Aguardando amostras;Aguardando Cliente;1;02/12/2025;-;Sistema RO
+INDUSTRIA BAIANA DE VIDROS LTDA;04649-2025;18/12/2025;2;19/12/2025;22;MANCHAS                       ;5,590972;277,33;Aguardando amostras;Aguardando Cliente;1;19/12/2025;-;Sistema RO
+VIDRACARIA LAJEADENSE LTDA.;04369-2025;02/12/2025;2;04/12/2025;38;BOLHAS                        ;0,069148;3,43;Aguardando informações do cliente;Aguardando Cliente;1;27/10/2025;-;Sistema RO
+VIDRACARIA LAJEADENSE LTDA.;04558-2025;12/12/2025;2;16/12/2025;28;FALHA DE METALIZAÇÃO;0,176979;7,023;Aguardando amostras;Aguardando Cliente;2;18/12/2025;-;Sistema RO
+VIDRACARIA LAJEADENSE LTDA.;04638-2025;18/12/2025;2;19/12/2025;22;BOLHAS                        ;0,388281;19,26;Aguardando amostras;Aguardando Cliente;1;19/12/2025;-;Sistema RO
+MARVITE MARANHAO VIDROS TEMP LTDA;03985-2025;31/10/2025;2;03/11/2025;70;FALHA DE METALIZAÇÃO;2,019064;100,152;Aguardando amostras/ Previsão de entrega 12/01/2026;Aguardando Cliente;4;22/12/2025;-;Sistema RO
+MARY ART SAO PAULO IND E COM LTDA;03841-2025;23/10/2025;2;24/10/2025;78;BOLHAS                        ;0,0361;1,7907;Aguardando fotos com escala ou amostras;Aguardando Cliente;4;22/12/2025;-;Sistema RO
+MODELO VIDROS IND E COMERCIO LTDA;04584-2025;15/12/2025;2;16/12/2025;25;FALHA DE METALIZAÇÃO;0,020265;2,1;Aguardando amostras;Aguardando Cliente;1;16/12/2025;-;Sistema RO
+MODELO VIDROS IND E COMERCIO LTDA;04585-2025;15/12/2025;2;16/12/2025;25;BOLHAS                        ;0,076608;3,8;Aguardando amostras;Aguardando Cliente;1;16/12/2025;-;Sistema RO
+PKO DO BRASIL IMPORT E EXPORT LTDA;04143-2025;12/11/2025;2;13/11/2025;58;DEFORMAÇÃO                    ;0,013377;1,3863;Aguardando amostras;Aguardando Cliente;2;12/12/2025;-;Sistema RO
+PILKINGTON BRASIL LTDA;04662-2025;22/12/2025;2;23/12/2025;18;CHAPAS QUEBRADAS              ;0,300456;38,52;Em análise quebra de defeito marcado - verificar com a Mayara;Aguardando Qualidade;1;23/12/2025;-;Sistema RO
+PORTICO ESQUADRIAS LTDA;04587-2025;15/12/2025;2;16/12/2025;25;DIFERENÇA DE TONALIDADE;13,512195;670,248;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
+PORTICO ESQUADRIAS LTDA;04588-2025;15/12/2025;2;16/12/2025;25;DIFERENÇA DE TONALIDADE;10,87188;539,28;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
+PORTICO ESQUADRIAS LTDA;04589-2025;15/12/2025;2;16/12/2025;25;DIFERENÇA DE TONALIDADE;13,356882;662,544;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
+PORTICO ESQUADRIAS LTDA;04590-2025;15/12/2025;2;16/12/2025;25;DIFERENÇA DE TONALIDADE;13,046236;647,135;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
+ROHDEN VIDROS LTDA;04494-2025;09/12/2025;2;11/12/2025;31;MANCHAS                       ;0,192426;24,67;Aguardando amostras/ Jacqueline em contato com cliente;Aguardando Cliente;1;11/12/2025;-;Sistema RO
+ROHDEN VIDROS LTDA;04621-2025;17/12/2025;2;18/12/2025;23;MANCHAS                       ;0,064116;8,22;Aguardando amostras;Aguardando Cliente;1;19/12/2025;-;Sistema RO
+ROHDEN VIDROS LTDA;04622-2025;17/12/2025;2;18/12/2025;23;MANCHAS                       ;0,054329;5,63;Aguardando amostras;Aguardando Cliente;1;19/12/2025;-;Sistema RO
+S E R GLASS VID BLINDADOS LTDA ME;04608-2025;16/12/2025;2;17/12/2025;24;BOLHAS                        ;1,6525;110,23;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
+S E R GLASS VID BLINDADOS LTDA ME;04609-2025;16/12/2025;2;17/12/2025;24;BOLHAS                        ;0,277026;39,31;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
+S E R GLASS VID BLINDADOS LTDA ME;04610-2025;16/12/2025;2;17/12/2025;24;BOLHAS                        ;0,977267;82,32;Aguardando amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
+SG IND E COM DE VIDROS LTDA;04472-2025;08/12/2025;2;11/12/2025;32;DIFICULDADE DE CORTE;1,24246;61,63;Possivel visita ao cliente - verificar com a Mayara, se possivel levar Juliano;Aguardando Qualidade;2;11/12/2025;-;Sistema RO
+TEMPERBRAS IND E COM DE VID LTDA;04469-2025;06/12/2025;2;09/12/2025;34;BOLHAS                        ;0,127755;6,33715;Aguardando informações do cliente;Aguardando Cliente;2;09/12/2025;-;Sistema RO
+TEMPERBRAS IND E COM DE VID LTDA;04567-2025;13/12/2025;2;15/12/2025;27;BOLHAS                        ;0,517943;25,86855;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;15/12/2025;-;Sistema RO
+TEMPERBRAS IND E COM DE VID LTDA;04576-2025;15/12/2025;2;15/12/2025;25;BOLHAS                        ;0,052617;2,61;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;15/12/2025;-;Sistema RO
+TEMPERBRAS IND E COM DE VID LTDA;04577-2025;15/12/2025;2;15/12/2025;25;BOLHAS                        ;0,218048;9,461;Aguardando amostras;Aguardando Cliente;1;15/12/2025;-;Sistema RO
+TEMPERBRAS IND E COM DE VID LTDA;04581-2025;15/12/2025;2;15/12/2025;25;BOLHAS                        ;0,20664;9,54;Aguardando amostras;Aguardando Cliente;1;15/12/2025;-;Sistema RO
+TEMPERBRAS IND E COM DE VID LTDA;04616-2025;16/12/2025;2;17/12/2025;24;BOLHAS                        ;0,159313;7,21;Aguardando fotos com escala ou amostras;Aguardando Cliente;1;17/12/2025;-;Sistema RO
+TEMPERBRAS IND E COM DE VID LTDA;04628-2025;17/12/2025;2;17/12/2025;23;BOLHAS                        ;0,062244;2,47;Aguardando amostras;Aguardando Cliente;1;17/12/2025;;
+TEMPERLANDIA TEMP VIDROLANDIA LTDA;04116-2025;11/11/2025;2;13/11/2025;59;PEDIDO ERRADO                 ;2,174377;107,856;Devolvido para inserir  evidência da perda do cliente referente aos 46m² (Aguardando retorno do Cliente);Aguardando Qualidade;1;23/12/2025;;
+VASA - VIDRIERIA ARGENTINA S.A;04279-2025;26/11/2025;2;27/11/2025;44;DEFORMAÇÃO                    ;8,1776;847,42;Aguardando amostras/ Jacqueline em contato com cliente ;Aguardando Cliente;1;27/11/2025;;
+VIDROFORTE IND E COM DE VIDROS LTDA;04479-2025;08/12/2025;2;11/12/2025;32;EMPENAMENTO                   ;0,114499;7,7;Aguardando amostras;Aguardando Cliente;2;15/12/2025;;
+VIDROFORTE IND E COM DE VIDROS LTDA;04495-2025;09/12/2025;2;10/12/2025;31;DEFEITOS DE ESTANHO           ;0,094094;7,7;Aguardando amostras;Aguardando Cliente;2;15/12/2025;;
+VIDROFORTE IND E COM DE VIDROS LTDA;04573-2025;15/12/2025;2;15/12/2025;25;MANCHAS                       ;0,05467;7,7;Aguardando amostras;Aguardando Cliente;1;15/12/2025;;
+VDX VID EXP IND VID MAQ LIMITADA;04549-2025;12/12/2025;2;15/12/2025;28;RISCO                         ;0,310464;15,4;Aguardando amostras;Aguardando Cliente;1;15/12/2025;;
+VIDRIO ANDINO COLOMBIA S.A.S.;04163-2025;14/11/2025;2;17/11/2025;56;DEFORMAÇÃO                    ;1,331121;137,94;Aguardando amostras/ Jacqueline em contato com cliente (Corrugado);Aguardando Cliente;1;17/11/2025;;
+VIDRIO ANDINO COLOMBIA S.A.S.;04278-2025;26/11/2025;2;27/11/2025;44;INCLUSÃO;5,464602;566,28;Aguardando amostras/ Jacqueline em contato com cliente (Debri);Aguardando Cliente;1;17/11/2025;;
+VIPEL INDUSTRIA E COMERCIO LTDA;04345-2025;01/12/2025;2;02/12/2025;39;CACO ADERENTE;0,064764;2,57;Aguardando amostras;Aguardando Cliente;2;15/12/2025;;
+VITRIUM IND E COM DE VIDROS LTDA;04040-2025;05/11/2025;2;06/11/2025;65;MANCHAS                       ;0,343675;23,112;Aguardando amostras;Aguardando Cliente;3;22/12/2025;;
